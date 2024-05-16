@@ -6,12 +6,12 @@ import cors from "cors";
 import "./utils/connectDB";
 
 const app = express();
-const port: number = 3000;
+const port: number = 4000;
 
 app.use(cors());
 
 const corsOrigin = {
-  origin: "http://localhost:5173",
+  origin: "http://localhost:3000",
   credentials: true,
   optionSuccessStatus: 200,
 };
