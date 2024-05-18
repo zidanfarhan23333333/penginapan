@@ -4,14 +4,19 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function Register() {
-  const [email, setEmail] = React.useState();
-  const [name, setName] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [error, setError] = React.useState();
+  const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (!email || !name || !password) {
+      setError("All fields are required");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:4000/api/v1/auth/register",
@@ -23,10 +28,11 @@ export default function Register() {
       );
       if (response.data.status_code === 200) {
         navigate("/login");
-        console.log("login berhasil");
+        console.log("Registration successful");
         console.log(response.data.data);
       } else {
-        console.log("login gagal");
+        console.log("Registration failed");
+        setError(response.data.message || "Registration failed");
       }
     } catch (error) {
       if (error.response) {
@@ -38,12 +44,14 @@ export default function Register() {
       }
     }
   };
+
   return (
     <div className="bg-white px-10 py-20 rounded-3xl border-gray-2">
       <h1 className="text-5xl font-semibold">Create an Account</h1>
       <p className="font-medium text-lg text-gray-500 mt-4">
         Let's get started by creating your account
       </p>
+      {error && <p className="text-red-500 mt-4">{error}</p>}
       <div className="mt-8">
         <div>
           <label className="text-lg font-medium">Name</label>
@@ -71,7 +79,7 @@ export default function Register() {
             placeholder="Enter your password"
             type="password"
             value={password}
-            onchange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="mt-8 flex flex-col gap-y-4">
@@ -85,7 +93,7 @@ export default function Register() {
         <div className="mt-8 flex justify-center items-center">
           <p className="font-medium text-base">
             Already have an account?
-            <Link className="underline text-violet-500 font-medium" to="/login">
+            <Link className="underline text-violet-500 font-medium" to="/home">
               SignIn
             </Link>
           </p>
