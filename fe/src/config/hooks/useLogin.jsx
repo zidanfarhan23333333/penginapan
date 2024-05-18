@@ -15,14 +15,14 @@ export const useLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/auth/login",
+        "http://localhost:4000/api/v1/auth/login",
         {
           email,
           password,
         }
       );
       if (response.data.status_code === 200) {
-        navigate("/");
+        navigate("/home");
         const user = response.data.data;
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 1);
@@ -36,7 +36,7 @@ export const useLogin = () => {
       } else {
         console.log("login gagal");
       }
-    } catch (error: any) {
+    } catch (error) {
       if (error.response) {
         setError(error.response.data.message);
       } else if (error.request) {

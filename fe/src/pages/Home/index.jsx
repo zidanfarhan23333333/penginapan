@@ -1,3 +1,5 @@
-export const Home = () => {
-  return <div>link</div>;
+const Home = () => {
+  return <div>Home Page</div>;
 };
+
+export default Home;

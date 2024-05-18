@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Register() {
+const Register = () => {
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -101,4 +101,6 @@ export default function Register() {
       </div>
     </div>
   );
-}
+};
+
+export default Register;
