@@ -15,14 +15,18 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-slate-800 h-screen w-full md:h-[550px] md:w-[550px] flex flex-col justify-center p-8 rounded shadow-lg gap-10">
-        <div className="flex justify-center">
-          <h1 className="text-white text-3xl mb-4 font-semibold">Sign In</h1>
+      <div className="bg-white h-screen w-full md:h-[550px] md:w-[550px] flex flex-col justify-center p-8 rounded shadow-lg gap-10 rounded-2xl">
+        <div className="flex flex-col items-center justify-center py-3">
+          <h1 mb-3>Borobudur Society.</h1>
+          <h1 className="text-black text-3xl mb-18 font-semibold rounded-xl">
+            Log In
+          </h1>
         </div>
+
         {error && <p className="text-red-500">{error}</p>}
         <form
           onSubmit={handleLogin}
-          className="login flex items-center justify-center flex-col gap-2"
+          className="login flex items-center justify-center flex-col gap-1"
         >
           <input
             type="email"
@@ -40,7 +44,7 @@ const Login = () => {
           />
           <button
             disabled={isLoading}
-            className="bg-blue-500 text-white px-4 py-2 w-full rounded hover:bg-blue-600 transition-colors duration-300"
+            className="active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all py-3 rounded-3xl bg-blue-500 text-white px-4 py-2 w-full rounded hover:bg-blue-600 transition-colors duration-300"
           >
             Login
           </button>
@@ -49,9 +53,9 @@ const Login = () => {
               className="hover:underline text-blue-500 "
               to="/reset-password"
             >
-              Lost password?
+              Forgot password?
             </Link>
-            <p className="text-white">
+            <p className="text-black">
               Don't have an account?{" "}
               <Link className="underline text-blue-500" to="/register">
                 Sign Up
