@@ -47,6 +47,15 @@ function App() {
             }
           />
           <Route
+            path="/accommodations"
+            element={
+              <>
+                <Navbar />
+                <Accomodation />
+              </>
+            }
+          />
+          <Route
             path="/home"
             element={
               <>
