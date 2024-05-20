@@ -2,6 +2,7 @@
   "dependencies": {
     "mongose": "^0.0.2-security",
     "react-icons": "^5.2.1",
+    "react-player": "^2.16.0",
     "react-router-dom": "^6.23.1"
   }
 }
