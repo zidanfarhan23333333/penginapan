@@ -1,5 +1,6 @@
 import Navbar from "./components/NavigationBar/Navbar";
 import Home from "./pages/Home";
+import Accomodation from "./pages/Akomodasi/accommodations";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
