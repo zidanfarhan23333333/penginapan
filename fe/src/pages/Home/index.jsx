@@ -21,6 +21,7 @@ const Index = () => {
   );
 };
 
+<<<<<<< HEAD
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -181,3 +182,7 @@ const App = () => {
 };
 
 export default App;
+=======
+
+export default index;
+>>>>>>> 1fadc8445dbe28a0e292d7f95c53dd7308b164d9

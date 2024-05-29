@@ -86,6 +86,7 @@ const Navbar = () => {
           </h1>
         </div>
 
+<<<<<<< HEAD
         <ul className="hidden md:flex cursor-pointer ml-auto">
           <li>
             <Link to="/">Home</Link>
@@ -102,6 +103,15 @@ const Navbar = () => {
           <li>
             <Link to="/book">Book</Link>
           </li>
+=======
+        <ul className="hidden md:flex cursor-pointer">
+          <li>Home</li>
+          <li><Link to="/accommodations">Akomodasi</Link></li>
+          <li>Destinasi</li>
+          <li>Travel</li>
+          <li>View</li>
+          <li>Book</li>
+>>>>>>> 1fadc8445dbe28a0e292d7f95c53dd7308b164d9
         </ul>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -151,10 +161,12 @@ const Navbar = () => {
           <div className="absolute left-0 top-20 w-full bg-gray-100/90 py-7 flex flex-col">
             <ul>
               <li className="border-b">Home</li>
+              <li className="border-b"><Link to="/accommodations">Akomodasi</Link></li>
               <li className="border-b">Destinasi</li>
               <li className="border-b">Travel</li>
               <li className="border-b">View</li>
               <li className="border-b">Book</li>
+              
             </ul>
             <div className="flex flex-col">
               {user ? (
