@@ -50,3 +50,9 @@ code {
     @apply text-2xl cursor-pointer;
   }
 }
+
+@layer components {
+  .card {
+    @apply rounded-xl shadow-lg;
+  }
+}

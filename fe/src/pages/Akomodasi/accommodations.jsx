@@ -2,7 +2,7 @@ import React from "react";
 
 const Accomodation = () => {
   return (
-    <div className="w-full overflow-x-hidden h-full m-0 p-0 flex flex-col">
+    <div className="w-full overflow-x-hidden h-full m-0 p-0 flex flex-col z-100">
       <section className="p-24 flex-1 flex justify-center">
         <div className="w-90 overflow-hidden">
           <h2 className="text-3xl mb-8 text-center">Akomodasi</h2>

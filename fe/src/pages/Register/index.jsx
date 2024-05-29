@@ -93,7 +93,7 @@ const Register = () => {
         <div className="mt-8 flex justify-center items-center">
           <p className="font-medium text-base">
             Already have an account?
-            <Link className="underline text-violet-500 font-medium" to="/home">
+            <Link className="underline text-violet-500 font-medium" to="/login">
               SignIn
             </Link>
           </p>

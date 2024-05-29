@@ -51,7 +51,7 @@ const Login = () => {
           <div className="flex flex-col items-center gap-3 p-3">
             <Link
               className="hover:underline text-blue-500 "
-              to="/reset-password"
+              to="/resetPassword"
             >
               Forgot password?
             </Link>
