@@ -4,24 +4,22 @@ import { BiSearch } from "react-icons/bi";
 import borabora from "../../assets/borabora.jpg";
 import maldives2 from "../../assets/maldives2.jpg";
 import keywest from "../../assets/keywest.jpg";
+import landing from "../../assets/landing.jpg";
 import { FaHotel, FaUtensils, FaHooli } from "react-icons/fa";
 
 const Index = () => {
   return (
     <div className="relative w-full h-screen">
-      <video
-        src={budur}
-        autoPlay
-        loop
-        muted
-        className="w-full h-full object-cover absolute inset-0"
-      ></video>
-      <div className="absolute inset-0 bg-black bg-opacity-50" />
+      <img
+        src={landing}
+        alt="landing.jpg"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0" />
     </div>
   );
 };
 
-<<<<<<< HEAD
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -74,12 +72,12 @@ const App = () => {
     <div className="relative h-screen">
       <Index />
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <div className="absolute top-1/3 text-center text-white">
+        <div className="absolute top-1/3 text-center text-black">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-3">
-            Your Partner <span className="text-blue-200">Vacation</span> is Here
+            Your Partner <span className="text-blue-500">Vacation</span> is Here
           </h1>
           <h2 className="text-xl md:text-2xl lg:text-3xl font-normal mb-3">
-            Let's <span className="text-blue-200">Booking</span> Now
+            Let's <span className="text-blue-500">Booking</span> Now
           </h2>
         </div>
         <div className="absolute top-1/2 transform -translate-y-1/2 flex flex-col items-center space-y-4 w-full max-w-2xl p-4 bg-opacity-70 rounded-xl shadow-lg mt-20">
@@ -182,7 +180,3 @@ const App = () => {
 };
 
 export default App;
-=======
-
-export default index;
->>>>>>> 1fadc8445dbe28a0e292d7f95c53dd7308b164d9
