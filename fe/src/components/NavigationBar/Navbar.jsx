@@ -73,7 +73,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed font-poppins top-0 left-0 right-0 z-50">
+    <div className="fixed font-poppins top-0 left-0 right-0 z-50 bg-white backdrop-blur-md">
       <div className="flex justify-between text-black items-center h-20 px-2">
         <div>
           <h1 className="cursor-pointer text-xl mt-1 ml-2">
@@ -138,7 +138,6 @@ const Navbar = () => {
         {mobileMenuOpen && (
           <div className="absolute left-0 top-20 w-full bg-gray-100/90 py-7 flex flex-col">
             <ul>
-              <li className="border-b">Home</li>
               <li className="border-b">
                 <Link to="/accommodations">Akomodasi</Link>
               </li>

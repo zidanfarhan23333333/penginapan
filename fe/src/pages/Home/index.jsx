@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import budur from "../../assets/budur.mp4";
 import { BiSearch } from "react-icons/bi";
-import borabora from "../../assets/borabora.jpg";
-import maldives2 from "../../assets/maldives2.jpg";
-import keywest from "../../assets/keywest.jpg";
-import landing from "../../assets/landing.jpg";
 import { FaHotel, FaUtensils, FaHooli } from "react-icons/fa";
+import landing from "../../assets/landing.jpg";
+import card from "../../assets/card.png";
+import pantai from "../../assets/pantai.png";
 
 const Index = () => {
   return (
@@ -42,31 +40,6 @@ const App = () => {
   const handleCardClick = (index) => {
     setSelectedCard(index);
   };
-
-  const Card = ({ place, index }) => (
-    <div
-      className={`card ${selectedCard === index ? "active" : ""} ${
-        hoveredCard === index ? "hover" : ""
-      }`}
-      onMouseEnter={() => setHoveredCard(index)}
-      onMouseLeave={() => setHoveredCard(null)}
-      onClick={() => handleCardClick(index)}
-    >
-      <div className="p-2 flex flex-col">
-        <div className="rounded-md overflow-hidden">
-          <img src={place.image} alt="" className="w-full h-72 object-cover" />
-        </div>
-        <h5 className="text-lg md:text-xl font-medium mt-1.5">{place.name}</h5>
-        <p className="text-slate-500 text-sm mt-1.5">{place.description}</p>
-        <a
-          href="#"
-          className="text-center bg-blue-400 text-blue-700 py-1.5 rounded-md font-semibold mt-2.5 hover:bg-blue-300 focus:scale-95 transition-colors duration-200 ease-out"
-        >
-          Explore
-        </a>
-      </div>
-    </div>
-  );
 
   return (
     <div className="relative h-screen">
@@ -116,7 +89,7 @@ const App = () => {
             <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
               <FaHotel className="text-4xl text-blue-500" />
             </div>
-            <span className="mt-3 text-white">Penginapan</span>
+            <span className="mt-3 text-blue-500">Penginapan</span>
           </a>
           <a
             href="/kuliner"
@@ -125,7 +98,7 @@ const App = () => {
             <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
               <FaUtensils className="text-4xl text-blue-500" />
             </div>
-            <span className="mt-3 text-white">Kuliner</span>
+            <span className="mt-3 text-blue-500">Kuliner</span>
           </a>
           <a
             href="/destinasi"
@@ -134,7 +107,7 @@ const App = () => {
             <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
               <FaUtensils className="text-4xl text-blue-500" />
             </div>
-            <span className="mt-3 text-white">Destinasi</span>
+            <span className="mt-3 text-blue-500">Destinasi</span>
           </a>
           <a
             href="/aktivitas"
@@ -143,35 +116,62 @@ const App = () => {
             <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
               <FaHooli className="text-4xl text-blue-500" />
             </div>
-            <span className="mt-3 text-white">Aktivitas</span>
+            <span className="mt-3 text-blue-500">Aktivitas</span>
           </a>
         </div>
       </div>
-      <div className="relative h-screen">
-        <div className="flex items-center justify-center min-h-screen container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-7 mt-2 z-20 cursor-pointer">
-            {[
-              {
-                image: maldives2,
-                name: "Borobudur Candirejo",
-                description:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore est, provident quam ad maiores, fuga, aspernatur modi ducimus deleniti incidunt dolor. Molestias maiores, at sit delectus placeat praesentium quas doloremque?",
-              },
-              {
-                image: keywest,
-                name: "Tuksongo",
-                description:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore est, provident quam ad maiores, fuga, aspernatur modi ducimus deleniti incidunt dolor. Molestias maiores, at sit delectus placeat praesentium quas doloremque?",
-              },
-              {
-                image: borabora,
-                name: "Saka 7",
-                description:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore est, provident quam ad maiores, fuga, aspernatur modi ducimus deleniti incidunt dolor. Molestias maiores, at sit delectus placeat praesentium quas doloremque?",
-              },
-            ].map((place, index) => (
-              <Card key={index} place={place} index={index} />
-            ))}
+      <div className="flex justify-center space-x-4">
+        <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
+          <img src={card} alt="Full Package" />
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
+            <div className="package-info text-left ml-4">
+              <h2 className="text-white text-2xl font-medium mb-2">
+                Full Package
+              </h2>
+              <p className="text-white text-sm">
+                Offering everything you need for a perfect vacation. Book now
+                and indulge in the best of what we offer!
+              </p>
+              <button className="bg-blue-500 mt-3" style={{ width: "150px" }}>
+                see
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
+          <img src={card} alt="Half Package" />
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
+            <div className="package-info text-left ml-4">
+              <h2 className="text-white text-2xl font-bold mb-2">
+                Half Package
+              </h2>
+              <p className="text-white text-sm font-medium">
+                Perfect for those seeking a balanced blend of relaxation and
+                adventure. Reserve for a memorable retreat!
+              </p>
+              <button className="bg-blue-500 mt-3" style={{ width: "150px" }}>
+                see
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
+          <img src={pantai} alt="Small Package" />
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
+            <div className="package-info text-left ml-4">
+              <h2 className="text-white text-2xl font-medium mb-2">
+                Small Package
+              </h2>
+              <p className="text-white text-sm">
+                Take a quick break from the routine with our Small Package,
+                ideal for a short yet rejuvenating getaway.
+              </p>
+              <button className="bg-white mt-3" style={{ width: "150px" }}>
+                see
+              </button>
+            </div>
           </div>
         </div>
       </div>
