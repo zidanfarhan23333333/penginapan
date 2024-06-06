@@ -56,3 +56,8 @@ code {
     @apply rounded-xl shadow-lg;
   }
 }
+
+.map-container {
+  height: 400px;
+  width: 100%;
+}
