@@ -5,7 +5,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail"
+import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail";
+import UsahaList from "./pages/Pengusaha/usahaList";
+
+const role = localStorage.getItem("role");
 
 function App() {
   return (
@@ -81,12 +84,23 @@ function App() {
               </>
             }
           />
-            <Route
+          <Route
             path="/detailAkomodasi/:id"
             element={
               <>
                 <Navbar />
                 <DetailAkomodasi />
+              </>
+            }
+          />
+
+          {/* ROUTE UNTUK USAHA */}
+          <Route
+            path="/usaha"
+            element={
+              <>
+                <Navbar />
+                {role === "pengusaha" ? <UsahaList /> : <Home />}
               </>
             }
           />

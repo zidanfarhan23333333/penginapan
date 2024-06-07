@@ -73,6 +73,8 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  const role = localStorage.getItem("role");
+
   return (
     <div className="fixed font-poppins top-0 left-0 right-0 z-50 bg-white backdrop-blur-md">
       <div className="flex justify-between text-black items-center h-20 px-2">
@@ -91,6 +93,11 @@ const Navbar = () => {
           <li>Travel</li>
           <li>View</li>
           <li>Book</li>
+          {role === "pengusaha" && (
+            <li>
+              <Link to="/usaha">Usaha Anda</Link>
+            </li>
+          )}
         </ul>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -146,6 +153,11 @@ const Navbar = () => {
               <li className="border-b">Travel</li>
               <li className="border-b">View</li>
               <li className="border-b">Book</li>
+              {role === "pengusaha" && (
+                <li>
+                  <Link to="/usaha">Usaha Anda</Link>
+                </li>
+              )}
             </ul>
             <div className="flex flex-col">
               {user ? (
