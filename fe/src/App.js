@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DetailAkomodasi from "./page/Akomodasi/accommodationDetail"
+import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail"
 
 function App() {
   return (

@@ -7,23 +7,25 @@ const Register = () => {
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [role, setRole] = React.useState("pengusaha");
   const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!email || !name || !password) {
+    if (!email || !name || !password || !role) {
       setError("All fields are required");
       return;
     }
 
-    try {
+    try { 
       const response = await axios.post(
         "http://localhost:4000/api/v1/auth/register",
         {
           email,
           name,
           password,
+          role,
         }
       );
       if (response.data.status_code === 200) {
@@ -81,6 +83,17 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+        <div>
+          <label className="text-lg font-medium">Jenis Akun</label>
+          <select
+            className="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option value="pengusaha">Pengusaha</option>
+            <option value="pelanggan">Pelanggan</option>
+          </select>
         </div>
         <div className="mt-8 flex flex-col gap-y-4">
           <button

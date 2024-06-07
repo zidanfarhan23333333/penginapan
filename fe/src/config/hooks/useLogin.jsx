@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
@@ -22,7 +22,6 @@ export const useLogin = () => {
         }
       );
       if (response.data.status_code === 200) {
-        navigate("/home");
         const user = response.data.data;
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 1);
@@ -31,10 +30,14 @@ export const useLogin = () => {
         )}; expires=${expirationDate.toUTCString()}`;
 
         const token = response.data.token;
+        const role = response.data.data.role;
         localStorage.setItem("token", token);
-        dispatch({ type: "LOGIN", payload: token });
+        localStorage.setItem("role", role);
+        dispatch({ type: "LOGIN", payload: { token, role } });
+
+        navigate("/home");
       } else {
-        console.log("login gagal");
+        setError("Login failed");
       }
     } catch (error) {
       if (error.response) {
@@ -44,6 +47,8 @@ export const useLogin = () => {
       } else {
         console.log("Request error:", error.message);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 

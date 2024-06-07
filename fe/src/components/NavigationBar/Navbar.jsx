@@ -68,6 +68,7 @@ const Navbar = () => {
     document.cookie = `userData=; expires=${expiresUTC}; path=/;`;
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/login");
     window.location.reload();
   };
