@@ -4,6 +4,9 @@ import { FaHotel, FaUtensils, FaHooli } from "react-icons/fa";
 import landing from "../../assets/landing.jpg";
 import card from "../../assets/card.png";
 import pantai from "../../assets/pantai.png";
+import MbakMbak from "../../assets/MbakMbak.jpg";
+import grid1 from "../../assets/grid1.png";
+import grid2 from "../../assets/grid2.png";
 
 const Index = () => {
   return (
@@ -171,6 +174,82 @@ const App = () => {
               <button className="bg-white mt-3" style={{ width: "150px" }}>
                 see
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative w-full h-screen mt-4 ml-2 mr-2 p-4">
+        <img
+          src={MbakMbak}
+          alt="MbakMbak.jpg"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute top-0 left-0 w-full h-full flex items-center">
+          <div className="w-1/2 h-full flex flex-col justify-center pl-10">
+            <h1 className="text-blue-800 text-6xl font-medium">
+              Check The{" "}
+              <span className="font-bold text-blue-900">Best Deal</span>
+            </h1>
+            <h1 className="text-blue-800 text-6xl font-medium">
+              Just For You!!!!
+            </h1>
+            <p className="mt-4 max-w">
+              Book now and experience the magic of a dream vacation
+              <br />. From breathtaking landscapes to romantic dinners, every
+              moment will be special.
+              <br />
+              Let’s make this journey one to remember forever.
+            </p>
+          </div>
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-8 max-w-xs">
+            Explore Packages
+          </button>
+
+          <div className="w-1/2 h-full flex justify-center items-center pr-10 gap-2">
+            <div className="card bg-white rounded-lg shadow-md w-80">
+              <img
+                src={grid2}
+                alt=""
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+              <div className="card-content p-6">
+                <h1 className="text-xl font-semibold text-gray-800 mb-3">
+                  Borobudur
+                </h1>
+                <p className="text-sm text-gray-600 mb-4">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum,
+                  doloremque? Labore est amet odit? Alias.
+                </p>
+                <a
+                  href="#"
+                  className="card-button block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                >
+                  Book Now
+                </a>
+              </div>
+            </div>
+            <div className="card bg-white rounded-lg shadow-md w-80">
+              <img
+                src={grid1}
+                alt=""
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+              <div className="card-content p-6">
+                <h1 className="text-xl font-semibold text-gray-800 mb-3">
+                  Waisak
+                </h1>
+                <p className="text-sm text-gray-600 mb-4">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum,
+                  doloremque? Labore est amet odit? Alias.
+                </p>
+                <a
+                  href="#"
+                  className="card-button block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                >
+                  Book Now
+                </a>
+              </div>
             </div>
           </div>
         </div>
