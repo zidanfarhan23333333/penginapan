@@ -56,7 +56,3 @@ code {
     @apply rounded-xl shadow-lg;
   }
 }
-
-.blur {
-  filter: blur(4px);
-}

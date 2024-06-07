@@ -202,7 +202,7 @@ const App = () => {
               Let’s make this journey one to remember forever.
             </p>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-8 max-w-xs">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm absolute bottom-0 left-1/2 transform -translate-x-1/2 mb- max-w-xs">
             Explore Packages
           </button>
 
