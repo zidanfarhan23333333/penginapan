@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Accomodation = () => {
+const Accommodation = () => {
   return (
-    <div className="w-full overflow-x-hidden h-full m-0 p-0 flex flex-col z-100">
+    <div className="w-full overflow-x-hidden h-full m-0 p-0 flex flex-col">
       <section className="p-24 flex-1 flex justify-center">
         <div className="w-90 overflow-hidden">
           <h2 className="text-3xl mb-8 text-center">Akomodasi</h2>
@@ -18,13 +19,13 @@ const Accomodation = () => {
                   className="mx-auto mb-4"
                 />
                 <h3 className="text-xl font-semibold mb-2">Nama Hotel</h3>
-                <p className="mb-4">Fasilitas, dll.</p>
-                <a
-                  href="booking-link"
+                <p className="mb-4">Rating, dll.</p>
+                <Link
+                  to={`/detailAkomodasi/${i}`}
                   className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
                 >
                   Pesan Sekarang
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -34,4 +35,4 @@ const Accomodation = () => {
   );
 };
 
-export default Accomodation;
+export default Accommodation;
