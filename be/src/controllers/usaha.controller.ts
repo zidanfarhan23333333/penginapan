@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   getAllUsaha,
   getUsahaById,
+  getusahaAndDelete,
   insertUsaha,
 } from "../services/usaha.service";
 import { v4 as uuidv4 } from "uuid";
@@ -101,7 +102,7 @@ export const createUsaha = async (req: Request, res: Response) => {
     return res.status(200).json({
       status: true,
       status_code: 200,
-      message: "created chat successfully",
+      message: "created usaha successfully",
       data: usahaData,
     });
   } catch (error: any) {
@@ -113,51 +114,51 @@ export const createUsaha = async (req: Request, res: Response) => {
   }
 };
 
-// export const getChatByCommunity = async (req: Request, res: Response) => {
+// export const getusahaByCommunity = async (req: Request, res: Response) => {
 //   const community_id = req.params.community_id;
 
-//   const chat = await getChatByCommunityId(community_id);
-//   if (Array.isArray(chat) && chat.length > 0) {
+//   const usaha = await getusahaByCommunityId(community_id);
+//   if (Array.isArray(usaha) && usaha.length > 0) {
 //     return res.status(200).send({
 //       status: true,
 //       status_code: 200,
-//       message: "Get data chat success",
-//       data: chat,
+//       message: "Get data usaha success",
+//       data: usaha,
 //     });
 //   } else {
 //     return res.status(200).send({
 //       status: true,
 //       status_code: 200,
-//       message: "No chat posted",
+//       message: "No usaha posted",
 //       data: {},
 //     });
 //   }
 // };
 
-// export const deleteChat = async (req: Request, res: Response) => {
-//   const id = req.params.id;
+export const deleteUsaha = async (req: Request, res: Response) => {
+  const id = req.params.id;
 
-//   try {
-//     const result = await getChatAndDelete(id);
-//     if (result) {
-//       res.status(200).json({
-//         status: true,
-//         status_code: 200,
-//         message: "Delete chat successfully",
-//       });
-//     } else {
-//       res.status(404).json({
-//         status: false,
-//         status_code: 404,
-//         message: "Data not found",
-//         data: {},
-//       });
-//     }
-//   } catch (error: any) {
-//     return res.status(422).send({
-//       status: false,
-//       status_code: 422,
-//       message: error.message,
-//     });
-//   }
-// };
+  try {
+    const result = await getusahaAndDelete(id);
+    if (result) {
+      res.status(200).json({
+        status: true,
+        status_code: 200,
+        message: "Delete usaha successfully",
+      });
+    } else {
+      res.status(404).json({
+        status: false,
+        status_code: 404,
+        message: "Data not found",
+        data: {},
+      });
+    }
+  } catch (error: any) {
+    return res.status(422).send({
+      status: false,
+      status_code: 422,
+      message: error.message,
+    });
+  }
+};

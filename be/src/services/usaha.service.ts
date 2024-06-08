@@ -31,9 +31,9 @@ export const insertUsaha = async (payload: any) => {
   return await usahaModel.create(payload);
 };
 
-export const getChatAndDelete = async (id: string) => {
+export const getusahaAndDelete = async (id: string) => {
   try {
-    return await usahaModel.findOneAndDelete({ chat_id: id });
+    return await usahaModel.findOneAndDelete({ usaha_id: id });
   } catch (error) {
     throw error;
   }
