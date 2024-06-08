@@ -116,7 +116,7 @@ export const createUsaha = async (req: Request, res: Response) => {
   }
 };
 
-export const updateBlog = async (req: Request, res: Response) => {
+export const updateUsaha = async (req: Request, res: Response) => {
   const id = req.params.id;
 
   const {
