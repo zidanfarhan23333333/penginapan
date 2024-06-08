@@ -16,10 +16,10 @@ export const getUsahaById = async (usaha_id: string) => {
   return await usahaModel.find({ usaha_id: usaha_id });
 };
 
-export const getBlogAndUpdate = async (id: string, payload: any) => {
+export const getUsahaAndUpdate = async (id: string, payload: any) => {
   return await usahaModel.findOneAndUpdate(
     {
-      blog_id: id,
+      usaha_id: id,
     },
     {
       $set: payload,
@@ -37,4 +37,10 @@ export const getusahaAndDelete = async (id: string) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const getUsahaFoto = async (id: string) => {
+  const usaha = await usahaModel.findOne({ id });
+  const usahaFoto = usaha?.foto_usaha;
+  return usahaFoto;
 };
