@@ -27,7 +27,7 @@ export const getBlogAndUpdate = async (id: string, payload: any) => {
   );
 };
 
-export const insertChat = async (payload: any) => {
+export const insertUsaha = async (payload: any) => {
   return await usahaModel.create(payload);
 };
 

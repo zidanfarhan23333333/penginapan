@@ -24,6 +24,9 @@ const usahaSchema = new mongoose.Schema(
     foto_usaha: {
       type: [String],
     },
+    fasilitas: {
+      type: [String],
+    },
     harga: {
       type: String,
     },

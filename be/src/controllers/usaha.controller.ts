@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { getAllUsaha, getUsahaById } from "../services/usaha.service";
+import {
+  getAllUsaha,
+  getUsahaById,
+  insertUsaha,
+} from "../services/usaha.service";
 import { v4 as uuidv4 } from "uuid";
 
 export const getUsaha = async (req: Request, res: Response) => {
@@ -51,43 +55,63 @@ export const getUsaha = async (req: Request, res: Response) => {
   }
 };
 
-// export const createUsaha = async (req: Request, res: Response) => {
-//   const chat_id = uuidv4();
-//   const { user_id, community_id, chat, name } = req.body;
+export const createUsaha = async (req: Request, res: Response) => {
+  const usaha_id = uuidv4();
+  const {
+    pengusaha_id,
+    nama_usaha,
+    deskripsi_usaha,
+    jenis_usaha,
+    alamat_usaha,
+    foto_usaha,
+    harga,
+    fasilitas,
+  } = req.body;
 
-//   if (!user_id || !community_id || !chat || !name) {
-//     return res.status(400).send({
-//       status: false,
-//       status_code: 400,
-//       message: "chat field are required",
-//     });
-//   }
+  if (
+    !pengusaha_id ||
+    !nama_usaha ||
+    !deskripsi_usaha ||
+    !jenis_usaha ||
+    !alamat_usaha ||
+    !foto_usaha ||
+    !fasilitas ||
+    !harga
+  ) {
+    return res.status(400).send({
+      status: false,
+      status_code: 400,
+      message: "field are required",
+    });
+  }
 
-//   try {
-//     const userImage = await getUserImage(user_id);
-//     const chatData = {
-//       chat_id,
-//       user_id,
-//       community_id,
-//       chat,
-//       name,
-//       image: userImage,
-//     };
-//     await insertChat(chatData);
-//     return res.status(200).json({
-//       status: true,
-//       status_code: 200,
-//       message: "created chat successfully",
-//       data: chatData,
-//     });
-//   } catch (error: any) {
-//     return res.status(422).send({
-//       status: false,
-//       status_code: 422,
-//       message: error.message,
-//     });
-//   }
-// };
+  try {
+    const usahaData = {
+      usaha_id,
+      pengusaha_id,
+      nama_usaha,
+      deskripsi_usaha,
+      jenis_usaha,
+      alamat_usaha,
+      foto_usaha,
+      harga,
+      fasilitas,
+    };
+    await insertUsaha(usahaData);
+    return res.status(200).json({
+      status: true,
+      status_code: 200,
+      message: "created chat successfully",
+      data: usahaData,
+    });
+  } catch (error: any) {
+    return res.status(422).send({
+      status: false,
+      status_code: 422,
+      message: error.message,
+    });
+  }
+};
 
 // export const getChatByCommunity = async (req: Request, res: Response) => {
 //   const community_id = req.params.community_id;
