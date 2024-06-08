@@ -10,4 +10,4 @@ export const usahaRouter: Router = Router();
 usahaRouter.get("/", getUsaha);
 usahaRouter.get("/:id", getUsaha);
 usahaRouter.post("/", createUsaha);
-usahaRouter.delete("/", deleteUsaha);
+usahaRouter.delete("/:id", deleteUsaha);
