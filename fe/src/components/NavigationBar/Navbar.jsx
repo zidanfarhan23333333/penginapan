@@ -149,9 +149,7 @@ const Navbar = () => {
               <li className="border-b">
                 <Link to="/accommodations">Akomodasi</Link>
               </li>
-              <li className="border-b">Destinasi</li>
-              <li className="border-b">Travel</li>
-              <li className="border-b">View</li>
+              <li className="border-b">Cek Pesanan</li>
               <li className="border-b">Book</li>
               {role === "pengusaha" && (
                 <li>
@@ -159,6 +157,7 @@ const Navbar = () => {
                 </li>
               )}
             </ul>
+
             <div className="flex flex-col">
               {user ? (
                 <button onClick={handleLogout} className="my-6">
@@ -169,12 +168,6 @@ const Navbar = () => {
                   Login
                 </button>
               )}
-            </div>
-            <div className="flex justify-between my-6">
-              <FaFacebook className="icon" />
-              <FaTwitter className="icon" />
-              <FaYoutube className="icon" />
-              <FaInstagram className="icon" />
             </div>
           </div>
         )}
