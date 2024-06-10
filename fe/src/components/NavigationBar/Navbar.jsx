@@ -80,19 +80,19 @@ const Navbar = () => {
       <div className="flex justify-between text-black items-center h-20 px-2">
         <div>
           <h1 className="cursor-pointer text-xl mt-1 ml-2">
-            Borobudur <span className="text-blue-500">Society</span>
+            <Link to="/">
+            Borobudur <span className="text-blue-500">Society</span></Link>
           </h1>
         </div>
 
         <ul className="hidden md:flex cursor-pointer">
-          <li>Home</li>
+          
           <li>
             <Link to="/accommodations">Akomodasi</Link>
           </li>
-          <li>Destinasi</li>
-          <li>Travel</li>
-          <li>View</li>
-          <li>Book</li>
+          <li>
+            <Link to="/pesanan">Cek pesanan</Link>
+          </li>
           {role === "pengusaha" && (
             <li>
               <Link to="/usaha">Usaha Anda</Link>

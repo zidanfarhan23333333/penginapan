@@ -4,8 +4,8 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5"; // Icon untuk tombol silang
 import hotelferi from "../../assets/rumahferi.jpg";
 import gambarpantai from "../../assets/maldives.jpg";
-import kamar from "../../assets/hotel2.jpg";
-import hotel2 from "../../assets/hotel1.jpg";
+// import kamar from "../../assets/hotel2.jpg";
+// import hotel2 from "../../assets/hotel1.jpg";
 import gambarpantai3 from "../../assets/maldives2.jpg";
 
 const AccommodationDetail = () => {
