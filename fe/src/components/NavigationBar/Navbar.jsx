@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsPerson } from "react-icons/bs";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import logobudur from "../../assets/logobudur.png";
-import uvbc from "../../assets/uvbc.png";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -80,19 +78,19 @@ const Navbar = () => {
       <div className="flex justify-between text-black items-center h-20 px-2">
         <div>
           <h1 className="cursor-pointer text-xl mt-1 ml-2">
-            Borobudur <span className="text-blue-500">Society</span>
+            <Link to="/">
+              Borobudur <span className="text-blue-500">Society</span>
+            </Link>
           </h1>
         </div>
 
         <ul className="hidden md:flex cursor-pointer">
-          <li>Home</li>
           <li>
             <Link to="/accommodations">Akomodasi</Link>
           </li>
-          <li>Destinasi</li>
-          <li>Travel</li>
-          <li>View</li>
-          <li>Book</li>
+          <li>
+            <Link to="/pesanan">Cek pesanan</Link>
+          </li>
           {role === "pengusaha" && (
             <li>
               <Link to="/usaha">Usaha Anda</Link>
@@ -149,7 +147,9 @@ const Navbar = () => {
               <li className="border-b">
                 <Link to="/accommodations">Akomodasi</Link>
               </li>
-              <li className="border-b">Cek Pesanan</li>
+              <li className="border-b">Destinasi</li>
+              <li className="border-b">Travel</li>
+              <li className="border-b">View</li>
               <li className="border-b">Book</li>
               {role === "pengusaha" && (
                 <li>
@@ -157,7 +157,6 @@ const Navbar = () => {
                 </li>
               )}
             </ul>
-
             <div className="flex flex-col">
               {user ? (
                 <button onClick={handleLogout} className="my-6">
@@ -168,6 +167,12 @@ const Navbar = () => {
                   Login
                 </button>
               )}
+            </div>
+            <div className="flex justify-between my-6">
+              <FaFacebook className="icon" />
+              <FaTwitter className="icon" />
+              <FaYoutube className="icon" />
+              <FaInstagram className="icon" />
             </div>
           </div>
         )}

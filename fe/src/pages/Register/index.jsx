@@ -2,6 +2,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import landing from "../../assets/landing.jpg";
 
 const Register = () => {
   const [email, setEmail] = React.useState("");
@@ -12,13 +13,13 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (!email || !name || !password || !role) {
       setError("All fields are required");
       return;
     }
 
-    try { 
+    try {
       const response = await axios.post(
         "http://localhost:4000/api/v1/auth/register",
         {
@@ -48,68 +49,83 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-white px-10 py-20 rounded-3xl border-gray-2">
-      <h1 className="text-5xl font-semibold">Create an Account</h1>
-      <p className="font-medium text-lg text-gray-500 mt-4">
-        Let's get started by creating your account
-      </p>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
-      <div className="mt-8">
-        <div>
-          <label className="text-lg font-medium">Name</label>
-          <input
-            className="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="text-lg font-medium">Email</label>
-          <input
-            className="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent"
-            placeholder="Enter your email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="text-lg font-medium">Password</label>
-          <input
-            className="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent"
-            placeholder="Enter your password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="text-lg font-medium">Jenis Akun</label>
-          <select
-            className="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="pengusaha">Pengusaha</option>
-            <option value="pelanggan">Pelanggan</option>
-          </select>
-        </div>
-        <div className="mt-8 flex flex-col gap-y-4">
-          <button
-            onClick={handleLogin}
-            className="active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-out transition-all py-3 rounded-xl bg-violet-500 text-white text-lg font-bold "
-          >
-            Sign up
-          </button>
-        </div>
-        <div className="mt-8 flex justify-center items-center">
-          <p className="font-medium text-base">
-            Already have an account?
-            <Link className="underline text-violet-500 font-medium" to="/login">
-              SignIn
-            </Link>
+    <div className="relative w-full h-screen">
+      <img
+        src={landing}
+        alt="landing.jpg"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black opacity-50" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="bg-white bg-opacity-90 h-auto w-full max-w-lg flex flex-col justify-center p-6 md:p-8 rounded shadow-lg gap-6 rounded-2xl">
+          <h1 className="text-3xl font-semibold text-center">
+            Create an Account
+          </h1>
+          <p className="font-medium text-lg text-gray-500 mt-2 text-center">
+            Let's get started by creating your account
           </p>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
+          <div className="mt-4">
+            <div>
+              <label className="text-lg font-medium">Name</label>
+              <input
+                className="w-full border-2 border-gray-300 rounded-xl p-3 mt-1 bg-transparent"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="mt-4">
+              <label className="text-lg font-medium">Email</label>
+              <input
+                className="w-full border-2 border-gray-300 rounded-xl p-3 mt-1 bg-transparent"
+                placeholder="Enter your email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mt-4">
+              <label className="text-lg font-medium">Password</label>
+              <input
+                className="w-full border-2 border-gray-300 rounded-xl p-3 mt-1 bg-transparent"
+                placeholder="Enter your password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mt-4">
+              <label className="text-lg font-medium">Jenis Akun</label>
+              <select
+                className="w-full border-2 border-gray-300 rounded-xl p-3 mt-1 bg-transparent"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="pengusaha">Pengusaha</option>
+                <option value="pelanggan">Pelanggan</option>
+              </select>
+            </div>
+            <div className="mt-6 flex flex-col gap-y-4">
+              <button
+                onClick={handleRegister}
+                className="active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-out transition-all py-3 rounded-xl bg-violet-500 text-white text-lg font-bold"
+              >
+                Sign up
+              </button>
+            </div>
+            <div className="mt-6 flex justify-center items-center">
+              <p className="font-medium text-base">
+                Already have an account?{" "}
+                <Link
+                  className="underline text-violet-500 font-medium"
+                  to="/login"
+                >
+                  Sign In
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

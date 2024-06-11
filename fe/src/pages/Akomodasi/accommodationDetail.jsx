@@ -7,11 +7,10 @@ import {
   FaWifi,
   FaChair,
 } from "react-icons/fa";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
+
 import { IoClose } from "react-icons/io5"; // Icon untuk tombol silang
 import hotelferi from "../../assets/rumahferi.jpg";
 import gambarpantai from "../../assets/maldives.jpg";
-
 import gambarpantai3 from "../../assets/maldives2.jpg";
 
 const AccommodationDetail = () => {

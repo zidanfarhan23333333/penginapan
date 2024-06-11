@@ -84,44 +84,6 @@ const App = () => {
             </span>
           )}
         </div>
-        <div className="absolute bottom-10 flex justify-center space-x-4 mb-17">
-          <a
-            href="/penginapan"
-            className="flex flex-col items-center no-underline transform hover:scale-105 transition-transform duration-300"
-          >
-            <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
-              <FaHotel className="text-4xl text-blue-500" />
-            </div>
-            <span className="mt-3 text-blue-500">Penginapan</span>
-          </a>
-          <a
-            href="/kuliner"
-            className="flex flex-col items-center no-underline transform hover:scale-105 transition-transform duration-300"
-          >
-            <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
-              <FaUtensils className="text-4xl text-blue-500" />
-            </div>
-            <span className="mt-3 text-blue-500">Kuliner</span>
-          </a>
-          <a
-            href="/destinasi"
-            className="flex flex-col items-center no-underline transform hover:scale-105 transition-transform duration-300"
-          >
-            <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
-              <FaUtensils className="text-4xl text-blue-500" />
-            </div>
-            <span className="mt-3 text-blue-500">Destinasi</span>
-          </a>
-          <a
-            href="/aktivitas"
-            className="flex flex-col items-center no-underline transform hover:scale-105 transition-transform duration-300"
-          >
-            <div className="bg-white p-3 rounded-full shadow-lg flex items-center justify-center">
-              <FaHooli className="text-4xl text-blue-500" />
-            </div>
-            <span className="mt-3 text-blue-500">Aktivitas</span>
-          </a>
-        </div>
       </div>
       <div className="flex justify-center space-x-4">
         <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
@@ -202,7 +164,7 @@ const App = () => {
               Let’s make this journey one to remember forever.
             </p>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm absolute bottom-0 left-1/2 transform -translate-x-1/2 mb- max-w-xs">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm absolute bottom-0 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7">
             Explore Packages
           </button>
 
