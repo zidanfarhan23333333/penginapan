@@ -9,6 +9,7 @@ import ResetPassword from "./pages/ResetPassword/resetPassword";
 import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail";
 import UsahaList from "./pages/Pengusaha/usahaList";
 import CreateUsaha from "./pages/Pengusaha/CreateUsaha";
+import UsahaDetail from "./pages/Pengusaha/usahaDetail";
 
 const role = localStorage.getItem("role");
 
@@ -74,6 +75,15 @@ function App() {
             <>
               <Navbar />
               {role === "pengusaha" ? <UsahaList /> : null}
+            </>
+          }
+        />
+        <Route
+          path="/usaha/:id"
+          element={
+            <>
+              <Navbar />
+              {role === "pengusaha" ? <UsahaDetail /> : null}
             </>
           }
         />

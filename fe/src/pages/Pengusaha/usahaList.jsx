@@ -36,7 +36,11 @@ const UsahaList = () => {
           <p className="text-gray-600">No usaha found.</p>
         ) : (
           usaha.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
+            <Link
+              to={`/usaha/${item.usaha_id}`}
+              key={item.id}
+              className="bg-white rounded-lg shadow-md p-4"
+            >
               <h2 className="text-lg font-semibold">
                 nama usaha: {item.nama_usaha}
               </h2>
@@ -46,7 +50,7 @@ const UsahaList = () => {
               <p className="text-gray-600">fasilitas: {item.fasilitas}</p>
               <p className="text-gray-600">harga: {item.harga}</p>
               <p className="text-gray-600">foto: {item.foto_usaha}</p>
-            </div>
+            </Link>
           ))
         )}
       </div>
