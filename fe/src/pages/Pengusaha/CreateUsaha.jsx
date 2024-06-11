@@ -97,7 +97,7 @@ const CreateUsaha = () => {
         fasilitas,
       };
 
-      console.log("Payload being sent:", payload);
+      console.log({ payload });
 
       const response = await axios.post(
         "http://localhost:4000/api/usaha",
@@ -193,11 +193,7 @@ const CreateUsaha = () => {
             <BackButton path={"/usaha"} />
             <button
               onClick={handleCreate}
-              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white ${
-                progress < 100
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-third-bg hover:bg-third-hover transition-colors duration-300"
-              }`}
+              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white bg-third-bg hover:bg-third-hover transition-colors duration-300`}
             >
               <FaSave />
               Create
