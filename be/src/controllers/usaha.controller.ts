@@ -71,23 +71,6 @@ export const createUsaha = async (req: Request, res: Response) => {
     fasilitas,
   } = req.body;
 
-  if (
-    !pengusaha_id ||
-    !nama_usaha ||
-    !deskripsi_usaha ||
-    !jenis_usaha ||
-    !alamat_usaha ||
-    !foto_usaha ||
-    !fasilitas ||
-    !harga
-  ) {
-    return res.status(400).send({
-      status: false,
-      status_code: 400,
-      message: "field are required",
-    });
-  }
-
   try {
     const usahaData = {
       usaha_id,
