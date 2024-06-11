@@ -6,15 +6,14 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 const CreateUsaha = () => {
-  const [user, setUser] = useState();
-  const [pengusaha_id, setPengusahaId] = useState("");
-  const [nama_usaha, setNamaUsaha] = useState("");
-  const [deskripsi_usaha, setDeskripsiUsaha] = useState("");
-  const [jenis_usaha, setJenisUsaha] = useState("");
-  const [alamat_usaha, setAlamatUsaha] = useState("");
-  const [fasilitas, setFasilitas] = useState("");
-  const [harga, setHarga] = useState("");
-  const [foto_usaha, setFotoUsaha] = useState("");
+  const [pengusaha_id, setPengusahaId] = useState();
+  const [nama_usaha, setNamaUsaha] = useState();
+  const [deskripsi_usaha, setDeskripsiUsaha] = useState();
+  const [jenis_usaha, setJenisUsaha] = useState();
+  const [alamat_usaha, setAlamatUsaha] = useState();
+  const [fasilitas, setFasilitas] = useState();
+  const [harga, setHarga] = useState();
+  const [foto_usaha, setFotoUsaha] = useState();
 
   const [error, setError] = useState("");
 
@@ -25,28 +24,13 @@ const CreateUsaha = () => {
 
     if (userCookie) {
       const userDataObj = JSON.parse(userCookie);
-      setUser(userDataObj);
       setPengusahaId(userDataObj.user_id);
     }
   }, []);
 
   const handleCreate = async () => {
-    if (
-      !pengusaha_id ||
-      !nama_usaha ||
-      !deskripsi_usaha ||
-      !jenis_usaha ||
-      !alamat_usaha ||
-      !foto_usaha ||
-      !fasilitas ||
-      !harga
-    ) {
-      setError("Field are required");
-      return;
-    }
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/usaha",
+      const payload = {
         pengusaha_id,
         nama_usaha,
         deskripsi_usaha,
@@ -54,17 +38,29 @@ const CreateUsaha = () => {
         alamat_usaha,
         foto_usaha,
         harga,
-        fasilitas
+        fasilitas,
+      };
+
+      console.log("Payload being sent:", payload);
+
+      const response = await axios.post(
+        "http://localhost:4000/api/usaha",
+        payload
       );
-      if (response.status === 200) {
+      if (response.data.status_code === 200) {
         console.log("Usaha created successfully:", response.data);
         navigate("/usaha");
       } else {
         console.log("Failed to create usaha");
       }
     } catch (error) {
-      console.error("There was an error creating the usaha!", error);
-      setError("Failed to create usaha");
+      if (error.response) {
+        setError(error.response.data.message);
+      } else if (error.request) {
+        console.error("No response received from server:", error.request);
+      } else {
+        console.error("Other error:", error.message);
+      }
     }
   };
 
@@ -109,7 +105,7 @@ const CreateUsaha = () => {
             required
           />
           <input
-            type="text" // iki type e ganti file mngko
+            type="text" // Change this to type="file" if uploading files
             name="foto_usaha"
             value={foto_usaha}
             onChange={(e) => setFotoUsaha(e.target.value)}

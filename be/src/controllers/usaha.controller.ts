@@ -71,6 +71,23 @@ export const createUsaha = async (req: Request, res: Response) => {
     fasilitas,
   } = req.body;
 
+  if (
+    !pengusaha_id ||
+    !nama_usaha ||
+    !deskripsi_usaha ||
+    !jenis_usaha ||
+    !alamat_usaha ||
+    !foto_usaha ||
+    !fasilitas ||
+    !harga
+  ) {
+    return res.status(400).send({
+      status: false,
+      status_code: 400,
+      message: "All fields are required",
+    });
+  }
+
   try {
     const usahaData = {
       usaha_id,
@@ -83,22 +100,23 @@ export const createUsaha = async (req: Request, res: Response) => {
       harga,
       fasilitas,
     };
+
     await insertUsaha(usahaData);
     return res.status(200).json({
       status: true,
       status_code: 200,
-      message: "created usaha successfully",
+      message: "Usaha created successfully",
       data: usahaData,
     });
-  } catch (error: any) {
+  } catch (error) {
+    console.error("Error inserting usaha:", error);
     return res.status(422).send({
       status: false,
       status_code: 422,
-      message: error.message,
+      message: error,
     });
   }
 };
-
 export const updateUsaha = async (req: Request, res: Response) => {
   const id = req.params.id;
 
