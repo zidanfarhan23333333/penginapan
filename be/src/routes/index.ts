@@ -4,7 +4,7 @@ import { usahaRouter } from "./usaha.route";
 
 const routesList: Array<[string, Router]> = [
   ["/api/v1/auth", AuthRouter],
-  ["/api/v1/usaha", usahaRouter],
+  ["/api/usaha", usahaRouter],
 ];
 
 export const routes = (app: Application) => {

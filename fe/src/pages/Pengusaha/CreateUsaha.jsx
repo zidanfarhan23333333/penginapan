@@ -23,7 +23,7 @@ const CreateUsaha = () => {
   };
 
   const handleCreate = async () => {
-    try {
+    try { 
       const response = await axios.post(
         "http://localhost:4000/api/usaha",
         formData
