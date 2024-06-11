@@ -4,6 +4,9 @@ import { FaSave } from "react-icons/fa";
 import BackButton from "../../components/atoms/backButton/backButton";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { storage } from "../../firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { v4 } from "uuid";
 
 const CreateUsaha = () => {
   const [pengusaha_id, setPengusahaId] = useState();
@@ -14,8 +17,10 @@ const CreateUsaha = () => {
   const [fasilitas, setFasilitas] = useState();
   const [harga, setHarga] = useState();
   const [foto_usaha, setFotoUsaha] = useState();
-
-  const [error, setError] = useState("");
+  const [image, setImage] = useState();
+  const [imageUrl, setImageUrl] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState();
 
   const navigate = useNavigate();
 
@@ -27,6 +32,55 @@ const CreateUsaha = () => {
       setPengusahaId(userDataObj.user_id);
     }
   }, []);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) {
+      setError("No file selected");
+      return;
+    }
+
+    const validExtensions = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/svg+xml",
+    ];
+
+    if (!validExtensions.includes(file.type)) {
+      setError(
+        "Invalid file type. Please select a valid image file (JPEG, PNG, GIF, SVG)."
+      );
+      return;
+    }
+
+    setError("");
+    setImage(file);
+
+    const imageRef = ref(storage, `images/${file.name + v4()}`);
+    const uploadTask = uploadBytesResumable(imageRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(progress);
+      },
+      (error) => {
+        console.error("Upload image gagal:", error);
+      },
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setImageUrl(downloadURL);
+          setProgress(100);
+        } catch (error) {
+          console.error("Error getting download URL:", error);
+        }
+      }
+    );
+  };
 
   const handleCreate = async () => {
     try {
@@ -105,7 +159,7 @@ const CreateUsaha = () => {
             required
           />
           <input
-            type="text" // iki tipene diganti file nk ws le setup firebase
+            type="file" // iki tipene diganti file nk ws le setup firebase
             name="foto_usaha"
             value={foto_usaha}
             onChange={(e) => setFotoUsaha(e.target.value)}
