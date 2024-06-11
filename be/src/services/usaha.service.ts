@@ -12,8 +12,8 @@ export const getAllUsaha = async () => {
     });
 };
 
-export const getUsahaById = async (usaha_id: string) => {
-  return await usahaModel.find({ usaha_id: usaha_id });
+export const getUsahaById = async (id: string) => {
+  return await usahaModel.findOne({ usaha_id: id });
 };
 
 export const getUsahaAndUpdate = async (id: string, payload: any) => {
