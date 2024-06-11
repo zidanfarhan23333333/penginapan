@@ -105,7 +105,7 @@ const CreateUsaha = () => {
             required
           />
           <input
-            type="text" // Change this to type="file" if uploading files
+            type="text" // iki tipene diganti file nk ws le setup firebase
             name="foto_usaha"
             value={foto_usaha}
             onChange={(e) => setFotoUsaha(e.target.value)}
