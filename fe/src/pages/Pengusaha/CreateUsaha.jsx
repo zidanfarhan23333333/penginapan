@@ -4,9 +4,8 @@ import { FaSave } from "react-icons/fa";
 import BackButton from "../../components/atoms/backButton/backButton";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { v4 } from "uuid";
+import { storage } from "../../firebase";
 
 const CreateUsaha = () => {
   const [pengusaha_id, setPengusahaId] = useState();
@@ -16,9 +15,8 @@ const CreateUsaha = () => {
   const [alamat_usaha, setAlamatUsaha] = useState();
   const [fasilitas, setFasilitas] = useState();
   const [harga, setHarga] = useState();
-  const [foto_usaha, setFotoUsaha] = useState();
-  const [image, setImage] = useState();
-  const [imageUrl, setImageUrl] = useState(null);
+  const [foto_usaha, setFotoUsaha] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState();
 
@@ -56,9 +54,9 @@ const CreateUsaha = () => {
     }
 
     setError("");
-    setImage(file);
+    setFotoUsaha(file);
 
-    const imageRef = ref(storage, `images/${file.name + v4()}`);
+    const imageRef = ref(storage, `images/${file.name}`);
     const uploadTask = uploadBytesResumable(imageRef, file);
     uploadTask.on(
       "state_changed",
@@ -83,6 +81,10 @@ const CreateUsaha = () => {
   };
 
   const handleCreate = async () => {
+    if (progress < 100) {
+      return;
+    }
+
     try {
       const payload = {
         pengusaha_id,
@@ -90,7 +92,7 @@ const CreateUsaha = () => {
         deskripsi_usaha,
         jenis_usaha,
         alamat_usaha,
-        foto_usaha,
+        foto_usaha: imageUrl,
         harga,
         fasilitas,
       };
@@ -158,11 +160,13 @@ const CreateUsaha = () => {
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
             required
           />
+          {progress > 0 && (
+            <p className="text-black">Uploading {progress.toFixed(2)}%</p>
+          )}
           <input
-            type="file" // iki tipene diganti file nk ws le setup firebase
+            type="file"
             name="foto_usaha"
-            value={foto_usaha}
-            onChange={(e) => setFotoUsaha(e.target.value)}
+            onChange={handleImageChange}
             placeholder="Foto Usaha URL"
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
             required
@@ -186,10 +190,14 @@ const CreateUsaha = () => {
             required
           />
           <div className="flex gap-4">
-            <BackButton path={"/"} />
+            <BackButton path={"/usaha"} />
             <button
               onClick={handleCreate}
-              className="bg-gray-500 p-2 rounded mb-4 flex justify-center items-center gap-2"
+              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white ${
+                progress < 100
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-third-bg hover:bg-third-hover transition-colors duration-300"
+              }`}
             >
               <FaSave />
               Create
