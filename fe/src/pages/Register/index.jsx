@@ -57,7 +57,7 @@ const Register = () => {
       />
       <div className="absolute inset-0 bg-black opacity-50" />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="bg-white bg-opacity-90 h-auto w-full max-w-lg flex flex-col justify-center p-6 md:p-8 rounded shadow-lg gap-6 rounded-2xl">
+        <div className="bg-white bg-opacity-90 h-auto w-full max-w-lg flex flex-col justify-center p-6 md:p-8 rounded shadow-lg gap-4 rounded-2xl">
           <h1 className="text-3xl font-semibold text-center">
             Create an Account
           </h1>
