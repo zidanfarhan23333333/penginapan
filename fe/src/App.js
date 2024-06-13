@@ -40,6 +40,7 @@ function App() {
             <>
               <Navbar />
               <Home />
+              <FooterPages />
             </>
           }
         />
@@ -62,6 +63,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/detailAkomodasi/:id"
           element={
