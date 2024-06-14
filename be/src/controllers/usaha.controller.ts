@@ -152,7 +152,7 @@ export const updateUsaha = async (req: Request, res: Response) => {
   if (foto_usaha) {
     fotoPrevious = foto_usaha;
   } else {
-    fotoPrevious = await getUsahaFoto(id);
+    fotoPrevious = await getUsahaFoto(pengusaha_id);
   }
 
   const usahaData = {
