@@ -10,6 +10,7 @@ import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail";
 import UsahaList from "./pages/Pengusaha/usahaList";
 import CreateUsaha from "./pages/Pengusaha/CreateUsaha";
 import UsahaDetail from "./pages/Pengusaha/usahaDetail";
+import FooterPages from "./components/FooterPages/Footer";
 
 const role = localStorage.getItem("role");
 
@@ -39,6 +40,7 @@ function App() {
             <>
               <Navbar />
               <Home />
+              <FooterPages />
             </>
           }
         />
@@ -57,9 +59,11 @@ function App() {
             <>
               <Navbar />
               <Home />
+              <FooterPages />
             </>
           }
         />
+
         <Route
           path="/detailAkomodasi/:id"
           element={
@@ -75,6 +79,7 @@ function App() {
             <>
               <Navbar />
               {role === "pengusaha" ? <UsahaList /> : null}
+              <FooterPages />
             </>
           }
         />

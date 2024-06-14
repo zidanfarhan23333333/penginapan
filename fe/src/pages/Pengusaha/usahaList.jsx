@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const UsahaList = () => {
   const [usaha, setUsaha] = useState([]);
@@ -18,6 +18,15 @@ const UsahaList = () => {
 
     fetchUsaha();
   }, []);
+
+  const deleteUsaha = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/usaha/${id}`);
+      setUsaha(usaha.filter((item) => item.usaha_id !== id));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div className="min-h-screen pt-28 px-4">
@@ -49,7 +58,7 @@ const UsahaList = () => {
               <p className="text-gray-600">alamat: {item.alamat_usaha}</p>
               <p className="text-gray-600">fasilitas: {item.fasilitas}</p>
               <p className="text-gray-600">harga: {item.harga}</p>
-              <img src={item.foto_usaha} alt="" />
+              <p className="text-gray-600">foto: {item.foto_usaha}</p>
             </Link>
           ))
         )}

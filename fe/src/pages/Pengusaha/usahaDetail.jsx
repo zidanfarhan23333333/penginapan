@@ -37,7 +37,7 @@ const UsahaDetail = () => {
   }, [id]);
 
   return (
-    <div className="pt-28">
+    <div className="pt-28 ml-4">
       <h2 className="text-lg font-semibold">Detail Usaha</h2>
 
       <div className="grid grid-cols-2 gap-4 ">
