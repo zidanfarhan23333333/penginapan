@@ -8,7 +8,9 @@ import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
 import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail";
 import UsahaList from "./pages/Pengusaha/usahaList";
+import CekPesanan from "./pages/Pesanan/cekpesanan";
 import CreateUsaha from "./pages/Pengusaha/CreateUsaha";
+import UpdateUsaha from "./pages/Pengusaha/UpdateUsaha";
 import UsahaDetail from "./pages/Pengusaha/usahaDetail";
 import FooterPages from "./components/FooterPages/Footer";
 
@@ -50,6 +52,15 @@ function App() {
             <>
               <Navbar />
               <Accomodation />
+            </>
+          }
+        />
+        <Route
+          path="/cekpesanan"
+          element={
+            <>
+              <Navbar />
+              <CekPesanan/>
             </>
           }
         />
@@ -98,6 +109,15 @@ function App() {
             <>
               <Navbar />
               {role === "pengusaha" ? <CreateUsaha /> : null}
+            </>
+          }
+        />
+        <Route
+          path="/usaha/UpdateUsaha/:id"
+          element={
+            <>
+              <Navbar />
+              {role === "pengusaha" ? <UpdateUsaha /> : null}
             </>
           }
         />
