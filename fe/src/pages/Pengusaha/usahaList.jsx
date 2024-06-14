@@ -29,39 +29,70 @@ const UsahaList = () => {
   };
 
   return (
-    <div className="min-h-screen pt-28 px-4">
-      <div className="flex w-full justify-between">
-        <div className="text-3xl font-bold mb-6">Usaha List</div>
-        <Link
-          to="/usaha/create-usaha"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-4 cursor-pointer items-center justify-center rounded"
-        >
-          Buat Usaha
-        </Link>
-      </div>
-      {error && <p className="text-red-500">{error}</p>}
-      <div className="grid grid-cols-2 gap-4">
-        {usaha.length === 0 ? (
-          <p className="text-gray-600">No usaha found.</p>
-        ) : (
-          usaha.map((item) => (
-            <Link
-              to={`/usaha/${item.usaha_id}`}
-              key={item.id}
-              className="bg-white rounded-lg shadow-md p-4"
-            >
-              <h2 className="text-lg font-semibold">
-                nama usaha: {item.nama_usaha}
-              </h2>
-              <p className="text-gray-600">deskripsi: {item.deskripsi_usaha}</p>
-              <p className="text-gray-600">jenis usaha: {item.jenis_usaha}</p>
-              <p className="text-gray-600">alamat: {item.alamat_usaha}</p>
-              <p className="text-gray-600">fasilitas: {item.fasilitas}</p>
-              <p className="text-gray-600">harga: {item.harga}</p>
-              <p className="text-gray-600">foto: {item.foto_usaha}</p>
-            </Link>
-          ))
-        )}
+    <div className="flex min-h-screen items-start justify-center bg-[#F2FAFD] text-black pt-16">
+      <div className="relative w-full max-w-5xl p-8">
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-2xl font-bold">Usaha List</div>
+          <Link
+            to="/usaha/create-usaha"
+            className="bg-blue-500 text-white rounded-full py-2 px-4 font-bold"
+          >
+            Buat Usaha
+          </Link>
+        </div>
+        {error && <p className="text-red-500">{error}</p>}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {usaha.length === 0 ? (
+            <p>No usaha found.</p>
+          ) : (
+            usaha.map((item) => (
+              <div
+                key={item.usaha_id}
+                className="card bg-white rounded-lg shadow-md w-full"
+              >
+                <div
+                  className="w-full h-48 bg-cover bg-center rounded-t-lg"
+                  style={{ backgroundImage: `url(${item.foto_usaha})` }}
+                ></div>
+                <div className="p-6">
+                  <h1 className="text-xl font-semibold text-gray-800 mb-3">
+                    {item.nama_usaha}
+                  </h1>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.deskripsi_usaha}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.jenis_usaha}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.alamat_usaha}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">{item.fasilitas}</p>
+                  <p className="text-sm text-gray-600 mb-4">{item.harga}</p>
+                  <Link
+                    to={`/usaha/${item.usaha_id}`}
+                    className="block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
+                  >
+                    Detail
+                  </Link>
+                  <button
+                    className="block bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    onClick={() => deleteUsaha(item.usaha_id)}
+                  >
+                    Delete
+                  </button>
+
+                  <Link
+                    to={`/usaha/UpdateUsaha/${item.usaha_id}`}
+                    className="block bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
+                  >
+                    Edit
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
