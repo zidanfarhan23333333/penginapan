@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaSave } from "react-icons/fa";
+import { FaImage, FaSave } from "react-icons/fa";
 import BackButton from "../../components/atoms/backButton/backButton";
-import Cookies from "js-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase";
@@ -17,6 +16,7 @@ const UpdateUsaha = () => {
   const [fasilitas, setFasilitas] = useState("");
   const [harga, setHarga] = useState("");
   const [foto_usaha, setFotoUsaha] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
@@ -37,7 +37,7 @@ const UpdateUsaha = () => {
         setAlamatUsaha(data.alamat_usaha);
         setFasilitas(data.fasilitas);
         setHarga(data.harga);
-        setImageUrl(data.foto_usaha);
+        setImagePreview(data.foto_usaha);
       } catch (error) {
         setError(error.message);
       }
@@ -70,6 +70,7 @@ const UpdateUsaha = () => {
 
     setError("");
     setFotoUsaha(file);
+    setImagePreview(URL.createObjectURL(file));
 
     const imageRef = ref(storage, `images/${file.name}`);
     const uploadTask = uploadBytesResumable(imageRef, file);
@@ -96,7 +97,8 @@ const UpdateUsaha = () => {
   };
 
   const handleUpdate = async () => {
-    if (progress < 100) {
+    if (progress < 100 && foto_usaha) {
+      setError("Image upload is not complete. Please wait.");
       return;
     }
 
@@ -114,21 +116,28 @@ const UpdateUsaha = () => {
 
       const response = await axios.put(
         `http://localhost:4000/api/usaha/${id}`,
-        payload
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       if (response.data.status_code === 200) {
         console.log("Usaha updated successfully:", response.data);
         navigate("/usaha");
       } else {
-        console.log("Failed to update usaha");
+        setError("Failed to update usaha");
       }
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message);
       } else if (error.request) {
         console.error("No response received from server:", error.request);
+        setError("No response received from server.");
       } else {
         console.error("Other error:", error.message);
+        setError("An error occurred.");
       }
     }
   };
@@ -169,7 +178,7 @@ const UpdateUsaha = () => {
             name="fasilitas"
             value={fasilitas}
             onChange={(e) => setFasilitas(e.target.value)}
-            placeholder="fasilitas"
+            placeholder="Fasilitas"
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
             required
           />
@@ -182,6 +191,20 @@ const UpdateUsaha = () => {
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
             required
           />
+          {imagePreview ? (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="mb-4 h-[250px] w-[450px] object-cover"
+            />
+          ) : (
+            <div className="relative w-[250px] h-[250px] shadow-lg object-cover mt-3 border-black  flex justify-center items-center">
+              <FaImage size={150} className="absolute" />
+            </div>
+          )}
+          {progress > 0 && (
+            <p className="text-black">Uploading {progress.toFixed(2)}%</p>
+          )}
           <input
             type="file"
             name="foto_usaha"
@@ -189,9 +212,7 @@ const UpdateUsaha = () => {
             placeholder="Foto Usaha URL"
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
           />
-          {progress > 0 && (
-            <p className="text-black">Uploading {progress.toFixed(2)}%</p>
-          )}
+
           <input
             type="text"
             name="harga"
@@ -205,7 +226,24 @@ const UpdateUsaha = () => {
             <BackButton path={"/usaha"} />
             <button
               onClick={handleUpdate}
-              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white bg-third-bg hover:bg-third-hover transition-colors duration-300`}
+              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white bg-third-bg hover:bg-third-hover transition-colors duration-300 ${
+                !nama_usaha ||
+                !jenis_usaha ||
+                !deskripsi_usaha ||
+                !alamat_usaha ||
+                !fasilitas ||
+                !harga
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }`}
+              disabled={
+                !nama_usaha ||
+                !jenis_usaha ||
+                !deskripsi_usaha ||
+                !alamat_usaha ||
+                !fasilitas ||
+                !harga
+              }
             >
               <FaSave />
               Update

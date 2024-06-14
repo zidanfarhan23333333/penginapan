@@ -117,6 +117,7 @@ export const createUsaha = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const updateUsaha = async (req: Request, res: Response) => {
   const id = req.params.id;
 
@@ -143,37 +144,31 @@ export const updateUsaha = async (req: Request, res: Response) => {
     return res.status(400).send({
       status: false,
       status_code: 400,
-      message: "field are required",
+      message: "All fields are required",
     });
   }
 
-  let fotoPrevious;
-
-  if (foto_usaha) {
-    fotoPrevious = foto_usaha;
-  } else {
-    fotoPrevious = await getUsahaFoto(pengusaha_id);
-  }
-
-  const usahaData = {
-    pengusaha_id,
-    nama_usaha,
-    deskripsi_usaha,
-    jenis_usaha,
-    alamat_usaha,
-    foto_usaha: fotoPrevious,
-    harga,
-    fasilitas,
-  };
-
   try {
-    const blog = await getUsahaAndUpdate(id, usahaData);
-    if (blog) {
+    const fotoPrevious = foto_usaha || (await getUsahaFoto(id));
+
+    const usahaData = {
+      pengusaha_id,
+      nama_usaha,
+      deskripsi_usaha,
+      jenis_usaha,
+      alamat_usaha,
+      foto_usaha: fotoPrevious,
+      harga,
+      fasilitas,
+    };
+
+    const updatedUsaha = await getUsahaAndUpdate(id, usahaData);
+    if (updatedUsaha) {
       return res.status(200).send({
         status: true,
         status_code: 200,
-        message: "Blog updated successfully",
-        data: usahaData,
+        message: "Usaha updated successfully",
+        data: updatedUsaha,
       });
     } else {
       return res.status(404).json({
