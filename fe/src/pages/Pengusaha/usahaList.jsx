@@ -81,6 +81,13 @@ const UsahaList = () => {
                   >
                     Delete
                   </button>
+                  
+                  <Link
+                    to={`/usaha/UpdateUsaha/${item.usaha_id}`}
+                    className="block bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
+                  >
+                    Edit
+                  </Link>
                 </div>
               </div>
             ))

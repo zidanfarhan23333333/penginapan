@@ -89,7 +89,7 @@ const Navbar = () => {
             <Link to="/accommodations">Akomodasi</Link>
           </li>
           <li>
-            <Link to="/pesanan">Cek pesanan</Link>
+            <Link to="/cekpesanan">Cek pesanan</Link>
           </li>
           {role === "pengusaha" && (
             <li>
