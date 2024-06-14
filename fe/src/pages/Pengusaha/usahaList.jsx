@@ -49,7 +49,7 @@ const UsahaList = () => {
               <p className="text-gray-600">alamat: {item.alamat_usaha}</p>
               <p className="text-gray-600">fasilitas: {item.fasilitas}</p>
               <p className="text-gray-600">harga: {item.harga}</p>
-              <p className="text-gray-600">foto: {item.foto_usaha}</p>
+              <img src={item.foto_usaha} alt="" />
             </Link>
           ))
         )}

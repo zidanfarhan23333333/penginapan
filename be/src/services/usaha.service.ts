@@ -40,7 +40,7 @@ export const getusahaAndDelete = async (id: string) => {
 };
 
 export const getUsahaFoto = async (id: string) => {
-  const usaha = await usahaModel.findOne({ id });
+  const usaha = await usahaModel.findOne({ usaha_id: id });
   const usahaFoto = usaha?.foto_usaha;
   return usahaFoto;
 };
