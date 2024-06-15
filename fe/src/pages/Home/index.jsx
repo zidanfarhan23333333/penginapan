@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FaHotel, FaUtensils, FaHooli } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import landing from "../../assets/landing.jpg";
 import card from "../../assets/card.png";
 import pantai from "../../assets/pantai.png";
@@ -163,10 +164,13 @@ const App = () => {
               <br />
               Let’s make this journey one to remember forever.
             </p>
-          </div>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm absolute bottom-0 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7">
-            Explore Packages
-          </button>
+          </div>         
+          <Link
+            to="/accommodations"
+            className="rounded-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-center font-semibold text-sm absolute bottom-20 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7"
+            style={{ zIndex: 10 }}
+          >Explore Packages
+          </Link>
 
           <div className="w-1/2 h-full flex justify-center items-center pr-10 gap-2">
             <div className="card bg-white rounded-lg shadow-md w-80">
@@ -211,6 +215,8 @@ const App = () => {
                 >
                   Book Now
                 </a>
+            
+
               </div>
             </div>
           </div>

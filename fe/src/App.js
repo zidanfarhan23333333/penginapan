@@ -42,7 +42,6 @@ function App() {
             <>
               <Navbar />
               <Home />
-              <FooterPages />
             </>
           }
         />
