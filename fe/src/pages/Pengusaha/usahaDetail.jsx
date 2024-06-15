@@ -27,7 +27,6 @@ const UsahaDetail = () => {
         setFasilitas(data.fasilitas);
         setHarga(data.harga);
         setFotoUsaha(data.foto_usaha);
-        console.log(data);
       } catch (error) {
         setError(error.message);
       }
@@ -37,20 +36,48 @@ const UsahaDetail = () => {
   }, [id]);
 
   return (
-    <div className="pt-28 ml-4">
-      <h2 className="text-lg font-semibold">Detail Usaha</h2>
-
-      <div className="grid grid-cols-2 gap-4 ">
-        <div className="bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-lg font-semibold">nama usaha: {nama_usaha}</h2>
-          <p className="text-gray-600">deskripsi: {deskripsi_usaha}</p>
-          <p className="text-gray-600">jenis usaha: {jenis_usaha}</p>
-          <p className="text-gray-600">alamat: {alamat_usaha}</p>
-          <p className="text-gray-600">fasilitas: {fasilitas}</p>
-          <p className="text-gray-600">harga: {harga}</p>
-          <p className="text-gray-600">foto: {foto_usaha}</p>
+    <div className="flex justify-center bg-[#F2FAFD] mb-25 mt-20">
+      <div className="w-full max-w-7xl flex flex-col px-4">
+        <div className="flex gap-1 mb-4 w-full h-full object-cover">
+          <div className="w-1/2">
+          {foto_usaha && (
+            <div>
+              <img src={foto_usaha} alt="Foto Usaha" className="w-full h-full object-cover" />
+            </div>
+          )}
+          {/* {foto_usaha && (
+            <div>
+              <img src={foto_usaha} alt="Foto Usaha" className="w-full h-full object-cover" />
+            </div>
+          )}
+          {foto_usaha && (
+            <div>
+              <img src={foto_usaha} alt="Foto Usaha" className="w-full h-full object-cover" />
+            </div>
+          )}
+          {foto_usaha && (
+            <div>
+              <img src={foto_usaha} alt="Foto Usaha" className="w-full h-full object-cover" />
+            </div>
+          )} */}
+          <div className="flex flex-col">
+          <div className="container w-full flex flex-col justify-center">
+            <div className="flex flex-col md:flex-row justify-between gap-4">
+              <div className="flex flex-col">
+          <h2 className="text-2xl font-semibold mb-2">Nama usaha : {nama_usaha}</h2>
+          
+          <p className="text-gray-600">Jenis usaha : {jenis_usaha}</p>
+          <p className="text-gray-600">Alamat : {alamat_usaha}</p>
+          <p className="text-gray-600">Fasilitas: {fasilitas}</p>
+          <p className="text-gray-600">Harga: {harga}</p>
+          <p className="text-sm text-gray-600">{deskripsi_usaha}</p>
+          </div>
         </div>
       </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
   );
 };
