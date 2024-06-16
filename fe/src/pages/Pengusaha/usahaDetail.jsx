@@ -9,9 +9,6 @@ import {
 } from "react-icons/fa";
 
 import { IoClose } from "react-icons/io5";
-// import hotelferi from "../../assets/rumahferi.jpg";
-// import gambarpantai from "../../assets/maldives.jpg";
-// import gambarpantai3 from "../../assets/maldives2.jpg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -29,6 +26,7 @@ const UsahaDetail = () => {
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
+
   useEffect(() => {
     const fetchUsaha = async () => {
       try {
@@ -55,34 +53,40 @@ const UsahaDetail = () => {
     <div className="flex justify-center bg-[#F2FAFD] mb-25 mt-20">
       <div className="w-full max-w-7xl flex flex-col px-4">
         <div className="flex gap-1 mb-4 w-full h-full object-cover">
-          <div className="w-1/2">
-            <img
-              src={foto_usaha}
-              alt="Gambar 1"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {foto_usaha && (
+            <div className="w-1/2">
+              <img
+                src={foto_usaha}
+                alt="Gambar 1"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
           <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-1">
-            <img
-              src={foto_usaha}
-              alt="Gambar 2"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={foto_usaha}
-              alt="Gambar 3"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={foto_usaha}
-              alt="Gambar 4"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={foto_usaha}
-              alt="Gambar 5"
-              className="w-full h-full object-cover"
-            />
+            {foto_usaha && (
+              <>
+                <img
+                  src={foto_usaha}
+                  alt="Gambar 2"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={foto_usaha}
+                  alt="Gambar 3"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={foto_usaha}
+                  alt="Gambar 4"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={foto_usaha}
+                  alt="Gambar 5"
+                  className="w-full h-full object-cover"
+                />
+              </>
+            )}
           </div>
         </div>
         <div className="flex flex-col">
@@ -125,26 +129,7 @@ const UsahaDetail = () => {
               <FaUtensils className="text-lg" />
               <p>{fasilitas}</p>
             </div>
-
-            <div className="text-sm text-black-600 gap-2">
-              <p>ini deskripsi {deskripsi_usaha}</p>
-            </div>
-            {/* <div className="flex items-center gap-2">
-              <FaUtensils className="text-lg" />
-              <p>Free Breakfast</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaChair className="text-lg" />
-              <p>Ruang Tamu</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaParking className="text-lg" />
-              <p>Parking Area</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaToilet className="text-lg" />
-              <p>Kamar Mandi</p>
-            </div> */}
+            {/* Add more facilities here */}
           </div>
           <hr className="mt-8 border-gray-300" />
         </div>
@@ -162,8 +147,8 @@ const UsahaDetail = () => {
             </h2>
             <ul>
               <li className="text-base">{nama_usaha}</li>
-              <li className="text-base">Borobudur {}</li>
-              <li className="text-base">Restaurant{}</li>
+              <li className="text-base">Borobudur</li>
+              <li className="text-base">Restaurant</li>
             </ul>
           </div>
         </div>
@@ -177,10 +162,12 @@ const UsahaDetail = () => {
               onClick={togglePopup}
             />
             <h2 className="text-2xl font-semibold mb-4">Form Pemesanan</h2>
+            {/* Add form content here */}
           </div>
         </div>
       )}
     </div>
   );
 };
+
 export default UsahaDetail;

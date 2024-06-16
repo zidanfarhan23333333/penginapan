@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  FaStar,
-  FaToilet,
-  FaUtensils,
-  FaParking,
-  FaWifi,
-  FaChair,
-} from "react-icons/fa";
+import { FaStar, FaToilet, FaUtensils, FaWifi } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const UsahaDetail = () => {
   const { id } = useParams();
+
   const [namaUsaha, setNamaUsaha] = useState("");
   const [deskripsiUsaha, setDeskripsiUsaha] = useState("");
   const [jenisUsaha, setJenisUsaha] = useState("");
@@ -20,8 +14,8 @@ const UsahaDetail = () => {
   const [fasilitas, setFasilitas] = useState([]);
   const [harga, setHarga] = useState("");
   const [fotoUsaha, setFotoUsaha] = useState("");
-  const [error, setError] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUsaha = async () => {
@@ -53,34 +47,40 @@ const UsahaDetail = () => {
     <div className="flex justify-center bg-[#F2FAFD] mb-25 mt-20">
       <div className="w-full max-w-7xl flex flex-col px-4">
         <div className="flex gap-1 mb-4 w-full h-full object-cover">
-          <div className="w-1/2">
-            <img
-              src={fotoUsaha}
-              alt="Gambar 1"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {fotoUsaha && (
+            <div className="w-1/2">
+              <img
+                src={fotoUsaha}
+                alt="Gambar 1"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
           <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-1">
-            <img
-              src={fotoUsaha}
-              alt="Gambar 2"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={fotoUsaha}
-              alt="Gambar 3"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={fotoUsaha}
-              alt="Gambar 4"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={fotoUsaha}
-              alt="Gambar 5"
-              className="w-full h-full object-cover"
-            />
+            {fotoUsaha && (
+              <>
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 2"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 3"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 4"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 5"
+                  className="w-full h-full object-cover"
+                />
+              </>
+            )}
           </div>
         </div>
         <div className="flex flex-col">
@@ -93,20 +93,12 @@ const UsahaDetail = () => {
                   ))}
                 </div>
                 <h2 className="text-2xl font-semibold mb-2">{namaUsaha}</h2>
-                <p className="text-sm text-gray-600">Rating: 5.0/5.0</p>
+                <p className="text-sm text-gray-600">{jenisUsaha}</p>
                 <p className="text-sm text-gray-600">{alamatUsaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
                 <p className="text-2xl font-semibold mb-2">Rp {harga}/malam</p>
-                <p className="text-sm text-gray-600">{jenisUsaha}</p>
-              </div>
-              <div className="flex flex-col items-start md:items-end">
-                <div
-                  className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center font-semibold hover:bg-blue-500 mt-2"
-                  onClick={togglePopup}
-                >
-                  Pesan Sekarang
-                </div>
+                {/* Add more details as needed */}
               </div>
             </div>
           </div>
@@ -118,9 +110,6 @@ const UsahaDetail = () => {
                 <p>{item.text}</p>
               </div>
             ))}
-            <div className="text-sm text-black-600 gap-2">
-              <p>ini deskripsi {deskripsiUsaha}</p>
-            </div>
           </div>
           <hr className="mt-8 border-gray-300" />
         </div>
