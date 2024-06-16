@@ -30,7 +30,7 @@ const UsahaList = () => {
 
   return (
     <div className="flex min-h-screen items-start justify-center bg-[#F2FAFD] text-black pt-16">
-      <div className="relative w-full max-w-5xl p-8">
+      <div className="relative w-full max-w-7xl p-8">
         <div className="flex justify-between items-center mb-4">
           <div className="text-2xl font-bold">Usaha List</div>
           <Link
@@ -41,7 +41,7 @@ const UsahaList = () => {
           </Link>
         </div>
         {error && <p className="text-red-500">{error}</p>}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {usaha.length === 0 ? (
             <p>No usaha found.</p>
           ) : (
