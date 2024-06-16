@@ -1,38 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Accommodation = () => {
+const UsahaList = () => {
+  const [usaha, setUsaha] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsaha = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/usaha");
+        setUsaha(response.data.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchUsaha();
+  }, []);
+
   return (
-    <div className="w-full overflow-x-hidden h-full m-0 p-0 flex flex-col">
-      <section className="p-24 flex-1 flex justify-center">
-        <div className="w-90 overflow-hidden">
-          <h2 className="text-3xl mb-8 text-center">Akomodasi</h2>
-          <div className="flex flex-wrap justify-around">
-            {Array.from({ length: 6 }, (_, i) => (
-              <div
-                key={i}
-                className="bg-gray-200 border border-gray-400 m-4 p-8 w-1/4 rounded-lg text-center transition-transform transition-shadow hover:transform hover:shadow-lg"
-              >
-                <img
-                  src="path/to/image.jpg"
-                  alt="Hotel"
-                  className="mx-auto mb-4"
-                />
-                <h3 className="text-xl font-semibold mb-2">Nama Hotel</h3>
-                <p className="mb-4">Rating, dll.</p>
-                <Link
-                  to={`/detailAkomodasi/${i}`}
-                  className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                >
-                  Pesan Sekarang
-                </Link>
-              </div>
-            ))}
-          </div>
+    <div className="flex min-h-screen items-start bg-[#F2FAFD] text-black pt-16">
+      <div className="relative w-full max-w-5xl p-8">
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-2xl font-bold">Booking</div>
         </div>
-      </section>
+        {error && <p className="text-red-500">{error}</p>}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {usaha.length === 0 ? (
+            <p>No usaha found.</p>
+          ) : (
+            usaha.map((item) => (
+              <div
+                key={item.usaha_id}
+                className="card bg-white rounded-lg shadow-md w-full"
+              >
+                <div
+                  className="w-full h-48 bg-cover bg-center rounded-t-lg"
+                  style={{ backgroundImage: `url(${item.foto_usaha})` }}
+                ></div>
+                <div className="p-6">
+                  <h1 className="text-xl font-semibold text-gray-800 mb-3">
+                    {item.nama_usaha}
+                  </h1>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.deskripsi_usaha}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.jenis_usaha}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {item.alamat_usaha}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-2">{item.fasilitas}</p>
+                  <p className="text-sm text-red-600 mb-4">{item.harga}</p>
+                  <Link
+                    // to={`/usaha/${item.usaha_id}`}
+                    to={`/detailAkomodasi/${item.usaha_id}`}
+                    className="block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
+                  >
+                    Lihat
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Accommodation;
+export default UsahaList;

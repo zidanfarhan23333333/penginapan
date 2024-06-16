@@ -8,63 +8,76 @@ import {
   FaChair,
 } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import hotelferi from "../../assets/rumahferi.jpg";
-import gambarpantai from "../../assets/maldives.jpg";
-import gambarpantai3 from "../../assets/maldives2.jpg";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const AccommodationDetail = () => {
+const UsahaDetail = () => {
+  const { id } = useParams();
+  const [namaUsaha, setNamaUsaha] = useState("");
+  const [deskripsiUsaha, setDeskripsiUsaha] = useState("");
+  const [jenisUsaha, setJenisUsaha] = useState("");
+  const [alamatUsaha, setAlamatUsaha] = useState("");
+  const [fasilitas, setFasilitas] = useState([]);
+  const [harga, setHarga] = useState("");
+  const [fotoUsaha, setFotoUsaha] = useState("");
+  const [error, setError] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [nama_usaha, setNamaUsaha] = useState("Rumah Ferry");
-  const [alamat_usaha, setAlamatUsaha] = useState(
-    "Jl. Raya Kalegen, Bandongang"
-  );
-  const [harga, setHarga] = useState("100,000");
-  const [fasilitas, setFasilitas] = useState([
-    { icon: FaParking, text: "Parking Area" },
-    { icon: FaWifi, text: "WiFi" },
-    { icon: FaUtensils, text: "Free Breakfast" },
-    { icon: FaChair, text: "Ruang Tamu" },
-    { icon: FaParking, text: "Parking Area" },
-    { icon: FaToilet, text: "Kamar Mandi" },
-  ]);
 
   useEffect(() => {
-    // Fetch data or perform initialization logic here
-  }, []);
+    const fetchUsaha = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/usaha/${id}`
+        );
+        const data = response.data.data;
+        setNamaUsaha(data.nama_usaha);
+        setDeskripsiUsaha(data.deskripsi_usaha);
+        setJenisUsaha(data.jenis_usaha);
+        setAlamatUsaha(data.alamat_usaha);
+        setFasilitas(data.fasilitas);
+        setHarga(data.harga);
+        setFotoUsaha(data.foto_usaha); // assuming foto_usaha is a URL to the image
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchUsaha();
+  }, [id]);
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
 
   return (
-    <div className="flex justify-center mb-25 mt-20">
+    <div className="flex justify-center bg-[#F2FAFD] mb-25 mt-20">
       <div className="w-full max-w-7xl flex flex-col px-4">
         <div className="flex gap-1 mb-4 w-full h-full object-cover">
           <div className="w-1/2">
             <img
-              src={hotelferi}
-              alt="Hotel Feri"
+              src={fotoUsaha}
+              alt="Gambar 1"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-1">
             <img
-              src={gambarpantai}
+              src={fotoUsaha}
               alt="Gambar 2"
               className="w-full h-full object-cover"
             />
             <img
-              src={gambarpantai}
+              src={fotoUsaha}
               alt="Gambar 3"
               className="w-full h-full object-cover"
             />
             <img
-              src={gambarpantai3}
+              src={fotoUsaha}
               alt="Gambar 4"
               className="w-full h-full object-cover"
             />
             <img
-              src={gambarpantai}
+              src={fotoUsaha}
               alt="Gambar 5"
               className="w-full h-full object-cover"
             />
@@ -75,20 +88,21 @@ const AccommodationDetail = () => {
             <div className="flex flex-col md:flex-row justify-between gap-4">
               <div className="flex flex-col">
                 <div className="flex gap-1 mb-2">
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
+                  {[...Array(5)].map((_, index) => (
+                    <FaStar key={index} className="w-5 h-5 text-yellow-500" />
+                  ))}
                 </div>
-                <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
+                <h2 className="text-2xl font-semibold mb-2">{namaUsaha}</h2>
                 <p className="text-sm text-gray-600">Rating: 5.0/5.0</p>
-                <p className="text-sm text-gray-600">{alamat_usaha}</p>
+                <p className="text-sm text-gray-600">{alamatUsaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
                 <p className="text-2xl font-semibold mb-2">Rp {harga}/malam</p>
+                <p className="text-sm text-gray-600">{jenisUsaha}</p>
+              </div>
+              <div className="flex flex-col items-start md:items-end">
                 <div
-                  className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center hover:bg-blue-500 mt-2"
+                  className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center font-semibold hover:bg-blue-500 mt-2"
                   onClick={togglePopup}
                 >
                   Pesan Sekarang
@@ -104,6 +118,9 @@ const AccommodationDetail = () => {
                 <p>{item.text}</p>
               </div>
             ))}
+            <div className="text-sm text-black-600 gap-2">
+              <p>ini deskripsi {deskripsiUsaha}</p>
+            </div>
           </div>
           <hr className="mt-8 border-gray-300" />
         </div>
@@ -120,9 +137,9 @@ const AccommodationDetail = () => {
               Daftar Lokasi Terdekat
             </h2>
             <ul>
-              <li className="text-base">Lokasi 1</li>
-              <li className="text-base">Lokasi 2</li>
-              <li className="text-base">Lokasi 3</li>
+              <li className="text-base">{namaUsaha}</li>
+              <li className="text-base">Borobudur</li>
+              <li className="text-base">Restaurant</li>
             </ul>
           </div>
         </div>
@@ -144,4 +161,4 @@ const AccommodationDetail = () => {
   );
 };
 
-export default AccommodationDetail;
+export default UsahaDetail;

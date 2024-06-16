@@ -79,10 +79,19 @@ const CreateUsaha = () => {
       }
     );
   };
+  const countWords = (str) => {
+    return str.trim().split(/\s+/).length;
+  };
 
   const handleCreate = async () => {
-    if (progress < 100) {
+    const wordCount = countWords(deskripsi_usaha);
+    if (wordCount > 50) {
+      setError("Deskripsi Usaha tidak boleh lebih dari 50 kata!!.");
       return;
+    }
+
+    if (progress < 100) {
+      setError("Upload image belum selesai");
     }
 
     try {

@@ -42,7 +42,6 @@ function App() {
             <>
               <Navbar />
               <Home />
-              <FooterPages />
             </>
           }
         />
@@ -52,6 +51,7 @@ function App() {
             <>
               <Navbar />
               <Accomodation />
+              <FooterPages />
             </>
           }
         />
@@ -61,6 +61,7 @@ function App() {
             <>
               <Navbar />
               <CekPesanan/>
+              <FooterPages />
             </>
           }
         />
@@ -81,6 +82,7 @@ function App() {
             <>
               <Navbar />
               <DetailAkomodasi />
+              <FooterPages/>
             </>
           }
         />
@@ -100,6 +102,7 @@ function App() {
             <>
               <Navbar />
               {role === "pengusaha" ? <UsahaDetail /> : null}
+              <FooterPages/>
             </>
           }
         />
