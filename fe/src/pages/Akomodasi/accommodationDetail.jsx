@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaStar,
   FaToilet,
@@ -7,14 +7,30 @@ import {
   FaWifi,
   FaChair,
 } from "react-icons/fa";
-
-import { IoClose } from "react-icons/io5"; // Icon untuk tombol silang
+import { IoClose } from "react-icons/io5";
 import hotelferi from "../../assets/rumahferi.jpg";
 import gambarpantai from "../../assets/maldives.jpg";
 import gambarpantai3 from "../../assets/maldives2.jpg";
 
 const AccommodationDetail = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [nama_usaha, setNamaUsaha] = useState("Rumah Ferry");
+  const [alamat_usaha, setAlamatUsaha] = useState(
+    "Jl. Raya Kalegen, Bandongang"
+  );
+  const [harga, setHarga] = useState("100,000");
+  const [fasilitas, setFasilitas] = useState([
+    { icon: FaParking, text: "Parking Area" },
+    { icon: FaWifi, text: "WiFi" },
+    { icon: FaUtensils, text: "Free Breakfast" },
+    { icon: FaChair, text: "Ruang Tamu" },
+    { icon: FaParking, text: "Parking Area" },
+    { icon: FaToilet, text: "Kamar Mandi" },
+  ]);
+
+  useEffect(() => {
+    // Fetch data or perform initialization logic here
+  }, []);
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
@@ -65,14 +81,12 @@ const AccommodationDetail = () => {
                   <FaStar className="w-5 h-5 text-yellow-500" />
                   <FaStar className="w-5 h-5 text-yellow-500" />
                 </div>
-                <h2 className="text-2xl font-semibold mb-2">Rumah Ferry</h2>
+                <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
                 <p className="text-sm text-gray-600">Rating: 5.0/5.0</p>
-                <p className="text-sm text-gray-600">
-                  Jl. Raya Kalegen, Bandongang
-                </p>
+                <p className="text-sm text-gray-600">{alamat_usaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
-                <p className="text-2xl font-semibold mb-2">Rp100rb/malam</p>
+                <p className="text-2xl font-semibold mb-2">Rp {harga}/malam</p>
                 <div
                   className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center hover:bg-blue-500 mt-2"
                   onClick={togglePopup}
@@ -84,30 +98,12 @@ const AccommodationDetail = () => {
           </div>
           <hr className="mt-8 border-gray-300" />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-2">
-              <FaParking className="text-lg" />
-              <p>Parking Area</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaWifi className="text-lg" />
-              <p>WiFi</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaUtensils className="text-lg" />
-              <p>Free Breakfast</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaChair className="text-lg" />
-              <p>Ruang Tamu</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaParking className="text-lg" />
-              <p>Parking Area</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaToilet className="text-lg" />
-              <p>Kamar Mandi</p>
-            </div>
+            {fasilitas.map((item, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <item.icon className="text-lg" />
+                <p>{item.text}</p>
+              </div>
+            ))}
           </div>
           <hr className="mt-8 border-gray-300" />
         </div>
@@ -140,6 +136,7 @@ const AccommodationDetail = () => {
               onClick={togglePopup}
             />
             <h2 className="text-2xl font-semibold mb-4">Form Pemesanan</h2>
+            <p>Isi form pemesanan di sini...</p>
           </div>
         </div>
       )}
