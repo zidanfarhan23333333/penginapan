@@ -1,36 +1,22 @@
 import React, { useState, useEffect } from "react";
-import {
-  FaStar,
-  FaToilet,
-  FaUtensils,
-  FaParking,
-  FaWifi,
-  FaChair,
-} from "react-icons/fa";
-
+import { FaStar, FaToilet, FaUtensils, FaWifi } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-// import hotelferi from "../../assets/rumahferi.jpg";
-// import gambarpantai from "../../assets/maldives.jpg";
-// import gambarpantai3 from "../../assets/maldives2.jpg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 const UsahaDetail = () => {
   const { id } = useParams();
-  const [nama_usaha, setNamaUsaha] = useState();
-  const [deskripsi_usaha, setDeskripsiUsaha] = useState();
-  const [jenis_usaha, setJenisUsaha] = useState();
-  const [alamat_usaha, setAlamatUsaha] = useState();
-  const [fasilitas, setFasilitas] = useState();
-  const [harga, setHarga] = useState();
-  const [foto_usaha, setFotoUsaha] = useState();
-  const [error, setError] = useState(null);
+
+  const [namaUsaha, setNamaUsaha] = useState("");
+  const [deskripsiUsaha, setDeskripsiUsaha] = useState("");
+  const [jenisUsaha, setJenisUsaha] = useState("");
+  const [alamatUsaha, setAlamatUsaha] = useState("");
+  const [fasilitas, setFasilitas] = useState([]);
+  const [harga, setHarga] = useState("");
+  const [fotoUsaha, setFotoUsaha] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [error, setError] = useState(null);
 
-  const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
-
-  };
   useEffect(() => {
     const fetchUsaha = async () => {
       try {
@@ -53,38 +39,48 @@ const UsahaDetail = () => {
     fetchUsaha();
   }, [id]);
 
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
   return (
     <div className="flex justify-center bg-[#F2FAFD] mb-25 mt-20">
       <div className="w-full max-w-7xl flex flex-col px-4">
         <div className="flex gap-1 mb-4 w-full h-full object-cover">
-          <div className="w-1/2">
-            <img
-              src={foto_usaha}
-              alt="Gambar 1"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {fotoUsaha && (
+            <div className="w-1/2">
+              <img
+                src={fotoUsaha}
+                alt="Gambar 1"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
           <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-1">
-            <img
-              src={foto_usaha}
-              alt="Gambar 2"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={foto_usaha}
-              alt="Gambar 3"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={foto_usaha}
-              alt="Gambar 4"
-              className="w-full h-full object-cover"
-            />
-            <img
-              src={foto_usaha}
-              alt="Gambar 5"
-              className="w-full h-full object-cover"
-            />
+            {fotoUsaha && (
+              <>
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 2"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 3"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 4"
+                  className="w-full h-full object-cover"
+                />
+                <img
+                  src={fotoUsaha}
+                  alt="Gambar 5"
+                  className="w-full h-full object-cover"
+                />
+              </>
+            )}
           </div>
         </div>
         <div className="flex flex-col">
@@ -92,64 +88,28 @@ const UsahaDetail = () => {
             <div className="flex flex-col md:flex-row justify-between gap-4">
               <div className="flex flex-col">
                 <div className="flex gap-1 mb-2">
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
+                  {[...Array(5)].map((_, index) => (
+                    <FaStar key={index} className="w-5 h-5 text-yellow-500" />
+                  ))}
                 </div>
-                <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
-                <p className="text-sm text-gray-600">{jenis_usaha}</p>
-                <p className="text-sm text-gray-600">
-                  {alamat_usaha}
-                </p>
+                <h2 className="text-2xl font-semibold mb-2">{namaUsaha}</h2>
+                <p className="text-sm text-gray-600">{jenisUsaha}</p>
+                <p className="text-sm text-gray-600">{alamatUsaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
-                <p className="text-2xl font-semibold mb-2">{harga}</p>
-                <div
-                  className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center font-semibold hover:bg-blue-500 mt-2"
-                  onClick={togglePopup}
-                >
-                  Pesan Sekarang
-                </div>
+                <p className="text-2xl font-semibold mb-2">Rp {harga}/malam</p>
+                {/* Add more details as needed */}
               </div>
             </div>
           </div>
           <hr className="mt-8 border-gray-300" />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            
-            <div className="flex items-center gap-2">
-              <FaWifi className="text-lg" />
-              <p>{fasilitas}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaToilet className="text-lg" />
-              <p>{fasilitas}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaUtensils className="text-lg" />
-              <p>{fasilitas}</p>
-            </div>
-
-            <div className="text-sm text-black-600 gap-2">
-              <p>ini deskripsi {deskripsi_usaha}</p>
-            </div>
-            {/* <div className="flex items-center gap-2">
-              <FaUtensils className="text-lg" />
-              <p>Free Breakfast</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaChair className="text-lg" />
-              <p>Ruang Tamu</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaParking className="text-lg" />
-              <p>Parking Area</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaToilet className="text-lg" />
-              <p>Kamar Mandi</p>
-            </div> */}
+            {fasilitas.map((item, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <item.icon className="text-lg" />
+                <p>{item.text}</p>
+              </div>
+            ))}
           </div>
           <hr className="mt-8 border-gray-300" />
         </div>
@@ -166,9 +126,9 @@ const UsahaDetail = () => {
               Daftar Lokasi Terdekat
             </h2>
             <ul>
-              <li className="text-base">{nama_usaha}</li>
-              <li className="text-base">Borobudur {}</li>
-              <li className="text-base">Restaurant{}</li>
+              <li className="text-base">{namaUsaha}</li>
+              <li className="text-base">Borobudur</li>
+              <li className="text-base">Restaurant</li>
             </ul>
           </div>
         </div>
@@ -182,10 +142,12 @@ const UsahaDetail = () => {
               onClick={togglePopup}
             />
             <h2 className="text-2xl font-semibold mb-4">Form Pemesanan</h2>
+            <p>Isi form pemesanan di sini...</p>
           </div>
         </div>
       )}
     </div>
   );
 };
+
 export default UsahaDetail;
