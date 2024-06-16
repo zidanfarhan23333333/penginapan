@@ -24,12 +24,10 @@ const UsahaDetail = () => {
   const [fasilitas, setFasilitas] = useState();
   const [harga, setHarga] = useState();
   const [foto_usaha, setFotoUsaha] = useState();
-  const [error, setError] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
-
   };
   useEffect(() => {
     const fetchUsaha = async () => {
@@ -46,7 +44,7 @@ const UsahaDetail = () => {
         setHarga(data.harga);
         setFotoUsaha(data.foto_usaha); // assuming foto_usaha is a URL to the image
       } catch (error) {
-        setError(error.message);
+        console.log(error.message);
       }
     };
 
@@ -100,9 +98,7 @@ const UsahaDetail = () => {
                 </div>
                 <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
                 <p className="text-sm text-gray-600">{jenis_usaha}</p>
-                <p className="text-sm text-gray-600">
-                  {alamat_usaha}
-                </p>
+                <p className="text-sm text-gray-600">{alamat_usaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
                 <p className="text-2xl font-semibold mb-2">{harga}</p>
@@ -117,7 +113,6 @@ const UsahaDetail = () => {
           </div>
           <hr className="mt-8 border-gray-300" />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            
             <div className="flex items-center gap-2">
               <FaWifi className="text-lg" />
               <p>{fasilitas}</p>
