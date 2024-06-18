@@ -79,7 +79,7 @@ const App = () => {
             </span>
           )}
         </div>
-        <div className="absolute top-2/3 transform -translate-y-1/2 flex justify-center mt-4 space-x-4 w-full max-w-2xl">
+        <div className="absolute top-2/3 transform -translate-y-1/2 flex justify-center mt-4 space-x-4 w-full max-w-2xl mt-4">
           <div className="text-center">
             <FaHotel size={40} className="text-blue-500" />
             <p>Hotel</p>
@@ -95,8 +95,10 @@ const App = () => {
             <p>Destination</p>
           </div>
           <div className="text-center">
-            <FaCarAlt size={40} className="text-blue-500" />
-            <p>Rent Car</p>
+            <Link to="Mobil">
+              <FaCarAlt size={40} className="text-blue-500" />
+              <p>Rent Car</p>
+            </Link>
           </div>
         </div>
       </div>

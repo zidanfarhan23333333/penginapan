@@ -2,17 +2,18 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavigationBar/Navbar";
 import Home from "./pages/Home";
-import Accomodation from "./pages/Akomodasi/accommodations";
+import Accommodation from "./pages/Akomodasi/accommodations";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword/resetPassword";
-import DetailAkomodasi from "./pages/Akomodasi/accommodationDetail";
+import DetailAccommodation from "./pages/Akomodasi/accommodationDetail";
 import UsahaList from "./pages/Pengusaha/usahaList";
 import CekPesanan from "./pages/Pesanan/cekpesanan";
 import CreateUsaha from "./pages/Pengusaha/CreateUsaha";
 import UpdateUsaha from "./pages/Pengusaha/UpdateUsaha";
 import UsahaDetail from "./pages/Pengusaha/usahaDetail";
 import FooterPages from "./components/FooterPages/Footer";
+import Mobil from "./pages/MobilPage/Mobil"; // Import the Mobil component
 
 const role = localStorage.getItem("role");
 
@@ -50,7 +51,7 @@ function App() {
           element={
             <>
               <Navbar />
-              <Accomodation />
+              <Accommodation />
               <FooterPages />
             </>
           }
@@ -60,7 +61,7 @@ function App() {
           element={
             <>
               <Navbar />
-              <CekPesanan/>
+              <CekPesanan />
               <FooterPages />
             </>
           }
@@ -75,14 +76,13 @@ function App() {
             </>
           }
         />
-
         <Route
           path="/detailAkomodasi/:id"
           element={
             <>
               <Navbar />
-              <DetailAkomodasi />
-              <FooterPages/>
+              <DetailAccommodation />
+              <FooterPages />
             </>
           }
         />
@@ -102,7 +102,7 @@ function App() {
             <>
               <Navbar />
               {role === "pengusaha" ? <UsahaDetail /> : null}
-              <FooterPages/>
+              <FooterPages />
             </>
           }
         />
@@ -121,6 +121,18 @@ function App() {
             <>
               <Navbar />
               {role === "pengusaha" ? <UpdateUsaha /> : null}
+            </>
+          }
+        />
+
+        <Route
+          path="/mobil"
+          element={
+            <>
+              <Navbar />
+
+              {role === "pengusaha" ? <Mobil /> : null}
+              <FooterPages />
             </>
           }
         />
