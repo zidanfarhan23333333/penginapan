@@ -4,6 +4,7 @@ import {
   getUsahaAndUpdate,
   getUsahaById,
   getUsahaByJenisUsaha,
+  getUsahaByPengusahaId,
   getUsahaFoto,
   getusahaAndDelete,
   insertUsaha,
@@ -56,6 +57,33 @@ export const getUsaha = async (req: Request, res: Response) => {
       message: "Internal Server Error",
       data: {},
     });
+  }
+};
+
+export const getUsahaByPengusaha = async (req: Request, res: Response) => {
+  const { pengusaha_id, user_id } = req.params;
+
+  try {
+    const usaha = await getUsahaByPengusahaId(pengusaha_id, user_id);
+
+    if (Array.isArray(usaha) && usaha.length > 0) {
+      return res.status(200).send({
+        status: true,
+        status_code: 200,
+        message: "Get data usaha by user id success",
+        data: usaha,
+      });
+    } else {
+      return res.status(200).send({
+        status: true,
+        status_code: 200,
+        message: "No usaha posted",
+        data: {},
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 

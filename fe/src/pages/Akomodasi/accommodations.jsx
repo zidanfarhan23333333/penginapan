@@ -45,7 +45,7 @@ const UsahaList = () => {
               >
                 <div
                   className="w-full h-48 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${item.foto_usaha})` }}
+                  style={{ backgroundImage: `url(${item.foto_usaha[0]})` }}
                 ></div>
                 <div className="p-4 flex flex-col flex-grow">
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">
