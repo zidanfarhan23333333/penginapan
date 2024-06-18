@@ -52,7 +52,7 @@ const UsahaList = () => {
               >
                 <div
                   className="w-full h-48 bg-cover bg-center rounded-t-lg"
-                  style={{ backgroundImage: `url(${item.foto_usaha})` }}
+                  style={{ backgroundImage: `url(${item.foto_usaha[0]})` }}
                 ></div>
                 <div className="p-6">
                   <h1 className="text-xl font-semibold text-gray-800 mb-3">

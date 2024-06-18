@@ -17,7 +17,7 @@ const Index = () => {
         alt="landing.jpg"
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0" />
+      <div className="absolute inset-0  opacity-50" />
     </div>
   );
 };
@@ -39,15 +39,19 @@ const App = () => {
     }
   };
 
+  const setJenisUsaha = (jenisUsaha) => {
+    localStorage.setItem("jenis_usaha", jenisUsaha);
+  };
+
   return (
     <div className="relative h-screen">
       <Index />
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <div className="absolute top-1/3 text-center text-black">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-3">
+        <div className="absolute top-1/3 text-center text-white">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-3 text-black">
             Your Partner <span className="text-blue-500">Vacation</span> is Here
           </h1>
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-normal mb-3">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-normal mb-3 text-black">
             Let's <span className="text-blue-500">Booking</span> Now
           </h2>
         </div>
@@ -79,30 +83,43 @@ const App = () => {
             </span>
           )}
         </div>
-        <div className="absolute top-2/3 transform translate-y-1/2 flex justify-center space-x-4 w-full max-w-2xl mt-4 ">
+        <div className="absolute top-2/3 transform translate-y-1/2 flex justify-center space-x-4 w-full max-w-2xl mt-4">
           <Link
-            to="/hotel"
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Hotel")}
             className="text-center flex items-center flex-col w-full justify-center"
           >
             <FaHotel size={40} className="text-blue-500" />
             <p className="flex w-full justify-center items-center">Hotel</p>
           </Link>
-          <div className="text-center flex items-center flex-col w-full justify-center">
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Restaurant")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
             <FaUtensils size={40} className="text-blue-500" />
             <p className="flex w-full justify-center items-center">
               Restaurant
             </p>
-          </div>
-          <div className="text-center flex items-center flex-col w-full justify-center">
+          </Link>
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Wisata")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
             <FaHooli size={40} className="text-blue-500" />
             <p className="flex w-full justify-center items-center">
               Destination
             </p>
-          </div>
-          <div className="text-center flex items-center flex-col w-full justify-center">
+          </Link>
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Mobil")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
             <FaCarAlt size={40} className="text-blue-500" />
             <p className="flex w-full justify-center items-center">Rent Car</p>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="flex justify-center space-x-4">
