@@ -24,7 +24,7 @@ const JenisUsahaList = () => {
     };
 
     fetchUsaha();
-  }, []);
+  }, [jenis_usaha]);
 
   return (
     <div className="flex min-h-screen items-start justify-center bg-[#F2FAFD] text-black pt-16">
