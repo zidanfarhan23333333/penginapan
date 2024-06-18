@@ -19,6 +19,12 @@ const Register = () => {
       return;
     }
 
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).+$/;
+    if (!passwordRegex.test(password)) {
+      setError("Password Kombinasi angka dan huruf besar");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:4000/api/v1/auth/register",

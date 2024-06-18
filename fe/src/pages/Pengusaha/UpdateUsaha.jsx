@@ -144,16 +144,40 @@ const UpdateUsaha = () => {
 
   return (
     <div className="flex items-center justify-center pt-20">
-      <div className="min-h-screen w-full flex flex-col justify-center p-8 rounded shadow-lg gap-10">
+      <div className="w-3/5 flex flex-col justify-center p-8 rounded shadow-lg bg-white">
         {error && <p className="text-red-500">{error}</p>}
-        <div className="flex items-center justify-center flex-col gap-2">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold">Edit Usaha</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-2">
+            <img
+              src={imagePreview || "/placeholder.jpg"}
+              alt="Preview"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="col-span-1 grid grid-rows-2 gap-4">
+            {Array(4)
+              .fill(null)
+              .map((_, index) => (
+                <img
+                  key={index}
+                  src={imagePreview || "/placeholder.jpg"}
+                  alt={`Preview ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              ))}
+          </div>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-4">
           <input
             type="text"
             name="nama_usaha"
             value={nama_usaha}
             onChange={(e) => setNamaUsaha(e.target.value)}
             placeholder="Nama Usaha"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            className="border-2 border-gray-300 rounded p-2 w-full"
             required
           />
           <input
@@ -162,7 +186,7 @@ const UpdateUsaha = () => {
             value={jenis_usaha}
             onChange={(e) => setJenisUsaha(e.target.value)}
             placeholder="Jenis Usaha"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            className="border-2 border-gray-300 rounded p-2 w-full"
             required
           />
           <textarea
@@ -170,7 +194,7 @@ const UpdateUsaha = () => {
             value={deskripsi_usaha}
             onChange={(e) => setDeskripsiUsaha(e.target.value)}
             placeholder="Deskripsi Usaha"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full h-[150px]"
+            className="border-2 border-gray-300 rounded p-2 w-full h-24 col-span-2"
             required
           />
           <input
@@ -179,7 +203,7 @@ const UpdateUsaha = () => {
             value={fasilitas}
             onChange={(e) => setFasilitas(e.target.value)}
             placeholder="Fasilitas"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            className="border-2 border-gray-300 rounded p-2 w-full"
             required
           />
           <input
@@ -188,67 +212,51 @@ const UpdateUsaha = () => {
             value={alamat_usaha}
             onChange={(e) => setAlamatUsaha(e.target.value)}
             placeholder="Alamat Usaha"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            className="border-2 border-gray-300 rounded p-2 w-full"
             required
           />
-          {imagePreview ? (
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="mb-4 h-[250px] w-[450px] object-cover"
-            />
-          ) : (
-            <div className="relative w-[250px] h-[250px] shadow-lg object-cover mt-3 border-black  flex justify-center items-center">
-              <FaImage size={150} className="absolute" />
-            </div>
-          )}
-          {progress > 0 && (
-            <p className="text-black">Uploading {progress.toFixed(2)}%</p>
-          )}
           <input
             type="file"
             name="foto_usaha"
             onChange={handleImageChange}
-            placeholder="Foto Usaha URL"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            className="border-2 border-gray-300 rounded p-2 w-full col-span-2"
           />
-
           <input
             type="text"
             name="harga"
             value={harga}
             onChange={(e) => setHarga(e.target.value)}
             placeholder="Harga"
-            className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            className="border-2 border-gray-300 rounded p-2 w-full"
             required
           />
-          <div className="flex gap-4">
-            <BackButton path={"/usaha"} />
-            <button
-              onClick={handleUpdate}
-              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white bg-third-bg hover:bg-third-hover transition-colors duration-300 ${
-                !nama_usaha ||
-                !jenis_usaha ||
-                !deskripsi_usaha ||
-                !alamat_usaha ||
-                !fasilitas ||
-                !harga
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""
-              }`}
-              disabled={
-                !nama_usaha ||
-                !jenis_usaha ||
-                !deskripsi_usaha ||
-                !alamat_usaha ||
-                !fasilitas ||
-                !harga
-              }
-            >
-              <FaSave />
-              Update
-            </button>
-          </div>
+        </div>
+        <div className="mt-4 flex justify-end">
+          <BackButton path={"/usaha"} />
+          <button
+            onClick={handleUpdate}
+            className={`ml-4 p-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 ${
+              !nama_usaha ||
+              !jenis_usaha ||
+              !deskripsi_usaha ||
+              !alamat_usaha ||
+              !fasilitas ||
+              !harga
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+            disabled={
+              !nama_usaha ||
+              !jenis_usaha ||
+              !deskripsi_usaha ||
+              !alamat_usaha ||
+              !fasilitas ||
+              !harga
+            }
+          >
+            <FaSave />
+            Save
+          </button>
         </div>
       </div>
     </div>

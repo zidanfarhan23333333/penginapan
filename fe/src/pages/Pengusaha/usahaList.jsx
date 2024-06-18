@@ -69,25 +69,26 @@ const UsahaList = () => {
                   </p>
                   <p className="text-sm text-gray-600 mb-2">{item.fasilitas}</p>
                   <p className="text-sm text-gray-600 mb-4">{item.harga}</p>
-                  <Link
-                    to={`/usaha/${item.usaha_id}`}
-                    className="block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
-                  >
-                    Detail
-                  </Link>
-                  <button
-                    className="block bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
-                    onClick={() => deleteUsaha(item.usaha_id)}
-                  >
-                    Delete
-                  </button>
-
-                  <Link
-                    to={`/usaha/UpdateUsaha/${item.usaha_id}`}
-                    className="block bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
-                  >
-                    Edit
-                  </Link>
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/usaha/${item.usaha_id}`}
+                      className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    >
+                      Detail
+                    </Link>
+                    <Link
+                      to={`/usaha/UpdateUsaha/${item.usaha_id}`}
+                      className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                      onClick={() => deleteUsaha(item.usaha_id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             ))

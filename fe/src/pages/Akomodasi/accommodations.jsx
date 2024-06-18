@@ -22,27 +22,35 @@ const UsahaList = () => {
   return (
     <div className="flex min-h-screen items-start justify-center bg-[#F2FAFD] text-black pt-16">
       <div className="relative w-full max-w-7xl p-8">
-        <div className="flex justify-between items-center mb-4">
-          <div className="text-2xl font-bold">Booking</div>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-semibold text-gray-800">
+            Check the <span className="text-blue-500 ">Best deal</span> just for
+            you!!!
+          </h2>
+          <p className="text-gray-600">
+            Book now and experience the magic of a dream vacation. From
+            breathtaking landscapes to romantic dinners, every moment will be
+            special. Let's make this journey one to remember forever.
+          </p>
         </div>
         {error && <p className="text-red-500">{error}</p>}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {usaha.length === 0 ? (
-            <p>No usaha found.</p>
+            <p className="text-center text-gray-600">No usaha found.</p>
           ) : (
             usaha.map((item) => (
               <div
                 key={item.usaha_id}
-                className="card bg-white rounded-lg shadow-md w-full"
+                className="card bg-white rounded-lg shadow-md w-full flex flex-col"
               >
                 <div
-                  className="w-full h-48 bg-cover bg-center rounded-t-lg"
+                  className="w-full h-48 bg-cover bg-center"
                   style={{ backgroundImage: `url(${item.foto_usaha})` }}
                 ></div>
-                <div className="p-6">
-                  <h1 className="text-xl font-semibold text-gray-800 mb-3">
+                <div className="p-4 flex flex-col flex-grow">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
                     {item.nama_usaha}
-                  </h1>
+                  </h3>
                   <p className="text-sm text-gray-600 mb-2">
                     {item.deskripsi_usaha}
                   </p>
@@ -54,13 +62,14 @@ const UsahaList = () => {
                   </p>
                   <p className="text-sm text-gray-600 mb-2">{item.fasilitas}</p>
                   <p className="text-sm text-red-600 mb-4">{item.harga}</p>
-                  <Link
-                    // to={`/usaha/${item.usaha_id}`}
-                    to={`/detailAkomodasi/${item.usaha_id}`}
-                    className="block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm mb-2"
-                  >
-                    Lihat
-                  </Link>
+                  <div className="mt-auto">
+                    <Link
+                      to={`/detailAkomodasi/${item.usaha_id}`}
+                      className="block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    >
+                      Lihat
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))

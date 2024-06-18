@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaSave } from "react-icons/fa";
 import BackButton from "../../components/atoms/backButton/backButton";
@@ -8,18 +8,17 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../firebase";
 
 const CreateUsaha = () => {
-  const [pengusaha_id, setPengusahaId] = useState();
-  const [nama_usaha, setNamaUsaha] = useState();
-  const [deskripsi_usaha, setDeskripsiUsaha] = useState();
-  const [jenis_usaha, setJenisUsaha] = useState();
-  const [alamat_usaha, setAlamatUsaha] = useState();
-  const [fasilitas, setFasilitas] = useState();
-  const [harga, setHarga] = useState();
-  const [foto_usaha, setFotoUsaha] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
-  const [progress, setProgress] = useState(0);
-  const [error, setError] = useState();
-
+  const [pengusaha_id, setPengusahaId] = useState("");
+  const [nama_usaha, setNamaUsaha] = useState("");
+  const [deskripsi_usaha, setDeskripsiUsaha] = useState("");
+  const [jenis_usaha, setJenisUsaha] = useState("");
+  const [alamat_usaha, setAlamatUsaha] = useState("");
+  const [fasilitas, setFasilitas] = useState("");
+  const [harga, setHarga] = useState("");
+  const [foto_usaha, setFotoUsaha] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState({});
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,10 +31,10 @@ const CreateUsaha = () => {
   }, []);
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const files = Array.from(e.target.files);
 
-    if (!file) {
-      setError("No file selected");
+    if (files.length > 5) {
+      setError("Maximum 5 images allowed.");
       return;
     }
 
@@ -45,40 +44,57 @@ const CreateUsaha = () => {
       "image/gif",
       "image/svg+xml",
     ];
+    const selectedFiles = files.filter((file) =>
+      validExtensions.includes(file.type)
+    );
 
-    if (!validExtensions.includes(file.type)) {
+    if (selectedFiles.length !== files.length) {
       setError(
-        "Invalid file type. Please select a valid image file (JPEG, PNG, GIF, SVG)."
+        "Invalid file type. Please select valid image files (JPEG, PNG, GIF, SVG)."
       );
       return;
     }
 
     setError("");
-    setFotoUsaha(file);
+    setFotoUsaha(selectedFiles);
 
-    const imageRef = ref(storage, `images/${file.name}`);
-    const uploadTask = uploadBytesResumable(imageRef, file);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(progress);
-      },
-      (error) => {
-        console.error("Upload image gagal:", error);
-      },
-      async () => {
-        try {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setImageUrl(downloadURL);
-          setProgress(100);
-        } catch (error) {
-          console.error("Error getting download URL:", error);
+    const uploads = selectedFiles.map((file) => {
+      const imageRef = ref(storage, `images/${file.name}`);
+      const uploadTask = uploadBytesResumable(imageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress((prevProgress) => ({
+            ...prevProgress,
+            [file.name]: progress.toFixed(2),
+          }));
+        },
+        (error) => {
+          console.error("Upload image gagal:", error);
+          setError("Upload image gagal");
+        },
+        async () => {
+          try {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            setImageUrls((prevUrls) => [...prevUrls, downloadURL]);
+          } catch (error) {
+            console.error("Error getting download URL:", error);
+            setError("Error getting download URL");
+          }
         }
-      }
-    );
+      );
+
+      return uploadTask;
+    });
+
+    Promise.all(uploads).then(() => {
+      setUploadProgress({});
+    });
   };
+
   const countWords = (str) => {
     return str.trim().split(/\s+/).length;
   };
@@ -86,12 +102,13 @@ const CreateUsaha = () => {
   const handleCreate = async () => {
     const wordCount = countWords(deskripsi_usaha);
     if (wordCount > 50) {
-      setError("Deskripsi Usaha tidak boleh lebih dari 50 kata!!.");
+      setError("Deskripsi Usaha tidak boleh lebih dari 50 kata!!");
       return;
     }
 
-    if (progress < 100) {
-      setError("Upload image belum selesai");
+    if (imageUrls.length < 5) {
+      setError("Upload 5 images before submitting.");
+      return;
     }
 
     try {
@@ -101,17 +118,16 @@ const CreateUsaha = () => {
         deskripsi_usaha,
         jenis_usaha,
         alamat_usaha,
-        foto_usaha: imageUrl,
+        foto_usaha: imageUrls,
         harga,
         fasilitas,
       };
-
-      console.log({ payload });
 
       const response = await axios.post(
         "http://localhost:4000/api/usaha",
         payload
       );
+
       if (response.data.status_code === 200) {
         console.log("Usaha created successfully:", response.data);
         navigate("/usaha");
@@ -123,8 +139,10 @@ const CreateUsaha = () => {
         setError(error.response.data.message);
       } else if (error.request) {
         console.error("No response received from server:", error.request);
+        setError("No response received from server");
       } else {
         console.error("Other error:", error.message);
+        setError("Other error occurred");
       }
     }
   };
@@ -147,7 +165,7 @@ const CreateUsaha = () => {
             name="deskripsi_usaha"
             value={deskripsi_usaha}
             onChange={(e) => setDeskripsiUsaha(e.target.value)}
-            placeholder="Deskripsi Usaha"
+            placeholder="Deskripsi Usaha (max 50 kata)"
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full h-[150px]"
             required
           />
@@ -169,15 +187,22 @@ const CreateUsaha = () => {
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
             required
           />
-          {progress > 0 && (
-            <p className="text-black">Uploading {progress.toFixed(2)}%</p>
+          {Object.keys(uploadProgress).length > 0 && (
+            <div className="mb-4">
+              {Object.keys(uploadProgress).map((fileName) => (
+                <p key={fileName} className="text-black">
+                  Uploading {fileName}: {uploadProgress[fileName]}%
+                </p>
+              ))}
+            </div>
           )}
           <input
             type="file"
             name="foto_usaha"
             onChange={handleImageChange}
-            placeholder="Foto Usaha URL"
+            placeholder="Foto Usaha"
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
+            multiple
             required
           />
           <input
@@ -202,7 +227,7 @@ const CreateUsaha = () => {
             <BackButton path={"/usaha"} />
             <button
               onClick={handleCreate}
-              className={`p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white bg-third-bg hover:bg-third-hover transition-colors duration-300`}
+              className="p-4 rounded-xl mb-4 flex justify-center items-center gap-2 text-white bg-third-bg hover:bg-third-hover transition-colors duration-300"
             >
               <FaSave />
               Create

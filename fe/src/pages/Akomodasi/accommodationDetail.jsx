@@ -19,7 +19,7 @@ const UsahaDetail = () => {
   const [alamat_usaha, setAlamatUsaha] = useState("");
   const [fasilitas, setFasilitas] = useState([]);
   const [harga, setHarga] = useState("");
-  const [foto_usaha, setFotoUsaha] = useState("");
+  const [foto_usaha, setFotoUsaha] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const togglePopup = () => {
@@ -39,7 +39,7 @@ const UsahaDetail = () => {
         setAlamatUsaha(data.alamat_usaha);
         setFasilitas(data.fasilitas);
         setHarga(data.harga);
-        setFotoUsaha(data.foto_usaha);
+        setFotoUsaha(data.foto_usaha || []);
       } catch (error) {
         console.log(error.message);
       }
@@ -52,40 +52,24 @@ const UsahaDetail = () => {
     <div className="flex justify-center bg-[#F2FAFD] mb-25 mt-20">
       <div className="w-full max-w-7xl flex flex-col px-4">
         <div className="flex gap-1 mb-4 w-full h-full object-cover">
-          {foto_usaha && (
+          {foto_usaha.length > 0 && (
             <div className="w-1/2">
               <img
-                src={foto_usaha}
+                src={foto_usaha[0]} // Display the first photo separately
                 alt="Gambar 1"
                 className="w-full h-full object-cover"
               />
             </div>
           )}
           <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-1">
-            {foto_usaha && (
-              <>
-                <img
-                  src={foto_usaha}
-                  alt="Gambar 2"
-                  className="w-full h-full object-cover"
-                />
-                <img
-                  src={foto_usaha}
-                  alt="Gambar 3"
-                  className="w-full h-full object-cover"
-                />
-                <img
-                  src={foto_usaha}
-                  alt="Gambar 4"
-                  className="w-full h-full object-cover"
-                />
-                <img
-                  src={foto_usaha}
-                  alt="Gambar 5"
-                  className="w-full h-full object-cover"
-                />
-              </>
-            )}
+            {foto_usaha.map((photo, index) => (
+              <img
+                key={index}
+                src={photo}
+                alt={`Gambar ${index + 2}`}
+                className="w-full h-full object-cover"
+              />
+            ))}
           </div>
         </div>
         <div className="flex flex-col">
@@ -102,6 +86,7 @@ const UsahaDetail = () => {
                 <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
                 <p className="text-sm text-gray-600">{jenis_usaha}</p>
                 <p className="text-sm text-gray-600">{alamat_usaha}</p>
+                <p className="text-sm text-gray-600">{deskripsi_usaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
                 <p className="text-2xl font-semibold mb-2">Rp {harga}/malam</p>
