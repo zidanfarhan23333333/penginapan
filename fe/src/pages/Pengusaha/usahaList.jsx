@@ -1,23 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const UsahaList = () => {
   const [usaha, setUsaha] = useState([]);
   const [error, setError] = useState(null);
+  const [pengusahaId, setPengusahaId] = useState(null);
+
+  useEffect(() => {
+    const userCookie = Cookies.get("userData");
+
+    if (userCookie) {
+      const userDataObj = JSON.parse(userCookie);
+      setPengusahaId(userDataObj.user_id);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUsaha = async () => {
-      try {
-        const response = await axios.get("http://localhost:4000/api/usaha");
-        setUsaha(response.data.data);
-      } catch (error) {
-        setError(error.message);
+      if (pengusahaId) {
+        try {
+          const response = await axios.get(
+            `http://localhost:4000/api/usaha/${pengusahaId}/${pengusahaId}`
+          );
+          setUsaha(response.data.data || []); // Ensure data is an array
+        } catch (error) {
+          setError(error.message);
+        }
       }
     };
 
     fetchUsaha();
-  }, []);
+  }, [pengusahaId]);
 
   const deleteUsaha = async (id) => {
     try {
