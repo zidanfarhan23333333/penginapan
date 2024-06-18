@@ -62,7 +62,7 @@ const UsahaDetail = () => {
             </div>
           )}
           <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-1">
-            {foto_usaha.map((photo, index) => (
+            {foto_usaha.slice(1).map((photo, index) => (
               <img
                 key={index}
                 src={photo}
@@ -100,33 +100,39 @@ const UsahaDetail = () => {
             </div>
           </div>
           <hr className="mt-8 border-gray-300" />
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {fasilitas.map((item, index) => (
-              <div key={index} className="flex items-center gap-2">
-                {renderIcon(item)}
-                <p>{item.text}</p>
-              </div>
-            ))}
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold mb-4">Fasilitas</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {fasilitas.map((item, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  {renderIcon(item)}
+                  <p>{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
           <hr className="mt-8 border-gray-300" />
-        </div>
-        <div className="flex flex-col sm:flex-row justify-between gap-8 mt-8">
-          <div className="sm:w-1/2 sm:pr-4">
-            <iframe
-              className="w-full h-96 rounded-lg"
-              src="https://maps.google.com/maps?width=100&amp;height=100&amp;hl=en&amp;q=balai%20desa%20kalegen+(Rumah%20Ferry)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-              title="Rumah Ferry Location"
-            ></iframe>
-          </div>
-          <div className="flex flex-col sm:w-1/2">
-            <h2 className="text-xl font-semibold mb-4">
-              Daftar Lokasi Terdekat
-            </h2>
-            <ul>
-              <li className="text-base">{nama_usaha}</li>
-              <li className="text-base">Borobudur</li>
-              <li className="text-base">Restaurant</li>
-            </ul>
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold mb-4">Route</h3>
+            <div className="flex flex-col sm:flex-row justify-between gap-8">
+              <div className="sm:w-1/2 sm:pr-4">
+                <iframe
+                  className="w-full h-96 rounded-lg"
+                  src="https://maps.google.com/maps?width=100&amp;height=100&amp;hl=en&amp;q=balai%20desa%20kalegen+(Rumah%20Ferry)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  title="Rumah Ferry Location"
+                ></iframe>
+              </div>
+              <div className="flex flex-col sm:w-1/2">
+                <h2 className="text-xl font-semibold mb-4">
+                  Daftar Lokasi Terdekat
+                </h2>
+                <ul>
+                  <li className="text-base">{nama_usaha}</li>
+                  <li className="text-base">Borobudur</li>
+                  <li className="text-base">Restaurant</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>

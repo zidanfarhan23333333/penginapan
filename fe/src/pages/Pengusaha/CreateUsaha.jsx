@@ -169,15 +169,19 @@ const CreateUsaha = () => {
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full h-[150px]"
             required
           />
-          <input
-            type="text"
+          <select
             name="jenis_usaha"
             value={jenis_usaha}
             onChange={(e) => setJenisUsaha(e.target.value)}
-            placeholder="Jenis Usaha"
             className="border-2 border-gray-300 rounded p-4 mb-4 w-full"
             required
-          />
+          >
+            <option value="">Pilih Jenis Usaha</option>
+            <option value="Hotel">Hotel</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Mobil">Mobil</option>
+            <option value="Wisata">Wisata</option>
+          </select>
           <input
             type="text"
             name="alamat_usaha"

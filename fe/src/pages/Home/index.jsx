@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import { FaHotel, FaUtensils, FaHooli } from "react-icons/fa";
+import { FaHotel, FaUtensils, FaHooli, FaCarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import landing from "../../assets/landing.jpg";
 import card from "../../assets/card.png";
@@ -25,8 +25,6 @@ const Index = () => {
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isValid, setIsValid] = useState(true);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [hoveredCard, setHoveredCard] = useState(null);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -39,10 +37,6 @@ const App = () => {
     if (isValid) {
       console.log("Searching for:", searchTerm);
     }
-  };
-
-  const handleCardClick = (index) => {
-    setSelectedCard(index);
   };
 
   return (
@@ -84,6 +78,26 @@ const App = () => {
               Maximum of 3 characters allowed
             </span>
           )}
+        </div>
+        <div className="absolute top-2/3 transform -translate-y-1/2 flex justify-center mt-4 space-x-4 w-full max-w-2xl">
+          <div className="text-center">
+            <FaHotel size={40} className="text-blue-500" />
+            <p>Hotel</p>
+          </div>
+          <div className="text-center">
+            <Link to="/RestaurantList">
+              <FaUtensils size={40} className="text-blue-500" />
+              <p>Restaurant</p>
+            </Link>
+          </div>
+          <div className="text-center">
+            <FaHooli size={40} className="text-blue-500" />
+            <p>Destination</p>
+          </div>
+          <div className="text-center">
+            <FaCarAlt size={40} className="text-blue-500" />
+            <p>Rent Car</p>
+          </div>
         </div>
       </div>
       <div className="flex justify-center space-x-4">
@@ -164,12 +178,13 @@ const App = () => {
               <br />
               Let’s make this journey one to remember forever.
             </p>
-          </div>         
+          </div>
           <Link
             to="/accommodations"
             className="rounded-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-center font-semibold text-sm absolute bottom-20 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7"
             style={{ zIndex: 10 }}
-          >Explore Packages
+          >
+            Explore Packages
           </Link>
 
           <div className="w-1/2 h-full flex justify-center items-center pr-10 gap-2">
@@ -195,6 +210,7 @@ const App = () => {
                 </a>
               </div>
             </div>
+
             <div className="card bg-white rounded-lg shadow-md w-80">
               <img
                 src={grid1}
@@ -203,7 +219,7 @@ const App = () => {
               />
               <div className="card-content p-6">
                 <h1 className="text-xl font-semibold text-gray-800 mb-3">
-                  Waisak
+                  Bali
                 </h1>
                 <p className="text-sm text-gray-600 mb-4">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum,
@@ -215,100 +231,10 @@ const App = () => {
                 >
                   Book Now
                 </a>
-            
-
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <footer className="bg-white py-8">
-          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="col-span-1 lg:col-span-2">
-              <h5 className="text-lg font-semibold text-blue-800 mb-4">
-                Borobudur Society
-              </h5>
-              <p className="text-sm text-gray-700 mb-2">Whatsapp: 081294</p>
-              <p className="text-sm text-gray-700 mb-2">
-                Email: Borobudursociety@mail
-              </p>
-              <p className="text-sm text-gray-700 mb-2">
-                Pusat panggilan (khusus Indonesia): 0842982
-              </p>
-            </div>
-            <div className="col-span-1">
-              <h5 className="text-lg font-semibold text-blue-800 mb-4">
-                Perusahaan
-              </h5>
-              <ul className="list-none p-0 m-0">
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-blue-600 text-sm"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-blue-600 text-sm"
-                  >
-                    Karir
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-blue-600 text-sm"
-                  >
-                    Korporasi
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-span-1">
-              <h5 className="text-lg font-semibold text-blue-800 mb-4">
-                Dukungan
-              </h5>
-              <ul className="list-none p-0 m-0">
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-blue-600 text-sm"
-                  >
-                    Pusat Bantuan
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-blue-600 text-sm"
-                  >
-                    Kebijakan Privasi
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="text-gray-700 hover:text-blue-600 text-sm"
-                  >
-                    Syarat & Ketentuan
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="col-span-1 lg:col-span-2">
-              <h5 className="text-lg font-semibold text-blue-800 mb-4">
-                Copyright 2024
-              </h5>
-              <p className="text-sm text-gray-700">
-                Borobudur Society, Indonesia
-              </p>
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
   );
