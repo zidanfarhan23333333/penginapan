@@ -44,3 +44,15 @@ export const getUsahaFoto = async (id: string) => {
   const usahaFoto = usaha?.foto_usaha;
   return usahaFoto;
 };
+
+export const getUsahaByJenisUsaha = async (jenis_usaha: string) => {
+  try {
+    const result = await usahaModel.find({
+      jenis_usaha: jenis_usaha,
+    });
+    return result;
+  } catch (error) {
+    console.error("Database Query Error: ", error); // Log error
+    throw error;
+  }
+};

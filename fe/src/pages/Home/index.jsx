@@ -79,26 +79,29 @@ const App = () => {
             </span>
           )}
         </div>
-        <div className="absolute top-2/3 transform -translate-y-1/2 flex justify-center mt-4 space-x-4 w-full max-w-2xl mt-4">
-          <div className="text-center">
+        <div className="absolute top-2/3 transform translate-y-1/2 flex justify-center space-x-4 w-full max-w-2xl mt-4 ">
+          <Link
+            to="/hotel"
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
             <FaHotel size={40} className="text-blue-500" />
-            <p>Hotel</p>
+            <p className="flex w-full justify-center items-center">Hotel</p>
+          </Link>
+          <div className="text-center flex items-center flex-col w-full justify-center">
+            <FaUtensils size={40} className="text-blue-500" />
+            <p className="flex w-full justify-center items-center">
+              Restaurant
+            </p>
           </div>
-          <div className="text-center">
-            <Link to="/RestaurantList">
-              <FaUtensils size={40} className="text-blue-500" />
-              <p>Restaurant</p>
-            </Link>
-          </div>
-          <div className="text-center">
+          <div className="text-center flex items-center flex-col w-full justify-center">
             <FaHooli size={40} className="text-blue-500" />
-            <p>Destination</p>
+            <p className="flex w-full justify-center items-center">
+              Destination
+            </p>
           </div>
-          <div className="text-center">
-            <Link to="Mobil">
-              <FaCarAlt size={40} className="text-blue-500" />
-              <p>Rent Car</p>
-            </Link>
+          <div className="text-center flex items-center flex-col w-full justify-center">
+            <FaCarAlt size={40} className="text-blue-500" />
+            <p className="flex w-full justify-center items-center">Rent Car</p>
           </div>
         </div>
       </div>
@@ -204,12 +207,12 @@ const App = () => {
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum,
                   doloremque? Labore est amet odit? Alias.
                 </p>
-                <a
-                  href="#"
+                <Link
+                  to=""
                   className="card-button block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
                 >
                   Book Now
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -227,12 +230,12 @@ const App = () => {
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum,
                   doloremque? Labore est amet odit? Alias.
                 </p>
-                <a
-                  href="#"
+                <Link
+                  to=""
                   className="card-button block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
                 >
                   Book Now
-                </a>
+                </Link>
               </div>
             </div>
           </div>

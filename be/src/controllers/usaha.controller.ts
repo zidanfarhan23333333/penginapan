@@ -3,6 +3,7 @@ import {
   getAllUsaha,
   getUsahaAndUpdate,
   getUsahaById,
+  getUsahaByJenisUsaha,
   getUsahaFoto,
   getusahaAndDelete,
   insertUsaha,
@@ -12,25 +13,25 @@ import { v4 as uuidv4 } from "uuid";
 export const getUsaha = async (req: Request, res: Response) => {
   const id = req.params.id;
 
-  if (id) {
-    const usaha = await getUsahaById(id);
-    if (usaha) {
-      return res.status(200).send({
-        status: true,
-        status_code: 200,
-        message: "Get detail data usaha successfully",
-        data: usaha,
-      });
+  try {
+    if (id) {
+      const usaha = await getUsahaById(id);
+      if (usaha) {
+        return res.status(200).send({
+          status: true,
+          status_code: 200,
+          message: "Get detail data usaha successfully",
+          data: usaha,
+        });
+      } else {
+        return res.status(404).send({
+          status: false,
+          status_code: 404,
+          message: "No usaha found",
+          data: {},
+        });
+      }
     } else {
-      return res.status(404).send({
-        status: false,
-        status_code: 404,
-        message: "No usaha posted",
-        data: {},
-      });
-    }
-  } else {
-    try {
       const usaha = await getAllUsaha();
       if (Array.isArray(usaha) && usaha.length > 0) {
         return res.status(200).send({
@@ -43,18 +44,48 @@ export const getUsaha = async (req: Request, res: Response) => {
         return res.status(200).send({
           status: true,
           status_code: 200,
-          message: "No usaha posted",
-          data: {},
+          message: "No usaha found",
+          data: [],
         });
       }
-    } catch (error) {
-      return res.status(500).send({
-        status: false,
-        status_code: 500,
-        message: "Internal Server Error",
-        data: {},
+    }
+  } catch (error) {
+    return res.status(500).send({
+      status: false,
+      status_code: 500,
+      message: "Internal Server Error",
+      data: {},
+    });
+  }
+};
+
+export const getJenisUsaha = async (req: Request, res: Response) => {
+  const { jenis_usaha } = req.body;
+
+  try {
+    const usaha = await getUsahaByJenisUsaha(jenis_usaha);
+    if (Array.isArray(usaha) && usaha.length > 0) {
+      return res.status(200).send({
+        status: true,
+        status_code: 200,
+        message: "Get data usaha success",
+        data: usaha,
+      });
+    } else {
+      return res.status(200).send({
+        status: true,
+        status_code: 200,
+        message: "No usaha found",
+        data: [],
       });
     }
+  } catch (error) {
+    return res.status(500).send({
+      status: false,
+      status_code: 500,
+      message: "Internal Server Error",
+      data: {},
+    });
   }
 };
 
