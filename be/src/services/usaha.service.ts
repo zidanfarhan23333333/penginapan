@@ -56,3 +56,37 @@ export const getUsahaByJenisUsaha = async (jenis_usaha: string) => {
     throw error;
   }
 };
+
+export const getUsahaByPengusahaId = async (
+  pengusaha_id: string,
+  user_id: string
+) => {
+  try {
+    const userVideId = await usahaModel.findOne({
+      pengusaha_id: pengusaha_id,
+    });
+    const userId = await authModel.findOne({ user_id: user_id });
+
+    if (userId && userVideId && userVideId.pengusaha_id === pengusaha_id) {
+      return await usahaModel
+        .find({ pengusaha_id: pengusaha_id })
+        .then((data) => {
+          return data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      return await usahaModel
+        .find({ pengusaha_id: pengusaha_id })
+        .then((data) => {
+          return data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
