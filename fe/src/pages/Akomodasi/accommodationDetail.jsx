@@ -265,7 +265,7 @@
 // };
 
 // export default UsahaDetail;
-
+// ================================================================
 import React, { useState, useEffect } from "react";
 import {
   FaStar,
@@ -315,15 +315,27 @@ const UsahaDetail = () => {
       alert("Semua bidang harus diisi!");
       return;
     }
-    // handleBooking();
+    handleBooking();
+  };
+
+  const handleBooking = async () => {
+    try {
+      // Contoh menggunakan axios untuk mengirim data pesanan ke server
+      const response = await axios.post('http://localhost:4000/api/booking', formData);
+      console.log('Booking successful:', response.data);
+      // Tambahkan logika setelah booking berhasil, seperti menampilkan pesan sukses atau mengarahkan pengguna ke halaman terima kasih
+    } catch (error) {
+      console.error('Error while booking:', error.message);
+      // Tambahkan logika untuk menangani error, misalnya menampilkan pesan error kepada pengguna
+    }
   };
 
   useEffect(() => {
     const fetchUsaha = async () => {
       try {
         const response = await axios.get(
-            `http://localhost:4000/api/usaha/${id}`
-          );
+          `http://localhost:4000/api/usaha/${id}`
+        );
         const data = response.data.data;
         setNamaUsaha(data.nama_usaha);
         setDeskripsiUsaha(data.deskripsi_usaha);
@@ -393,10 +405,8 @@ const UsahaDetail = () => {
           <hr className="mt-8 border-gray-300" />
           <div>
             <h2 className="text-xl font-semibold my-2">Fasilitas</h2>
-            <p className="text-sm">{fasilitas}
-            </p>
-            <p className="text-sm">{deskripsi_usaha}
-            </p>
+            <p className="text-sm">{fasilitas}</p>
+            <p className="text-sm">{deskripsi_usaha}</p>
           </div>
           <hr className="mt-8 border-gray-300" />
           <div className="mt-8">
@@ -415,8 +425,8 @@ const UsahaDetail = () => {
                 </h2>
                 <ul>
                   <li className="text-base">{nama_usaha}</li>
-                  <li className="text-base">{nama_usaha}</li>
-                  <li className="text-base">{nama_usaha}</li>
+                  <li className="text-base">Candi Borobudur</li>
+                  <li className="text-base">Candi Mendut</li>
                 </ul>
               </div>
             </div>
@@ -425,71 +435,71 @@ const UsahaDetail = () => {
       </div>
 
       {isPopupOpen && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div className="bg-white w-full max-w-lg p-8 rounded-lg relative z-50">
-          <IoClose
-            className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
-            onClick={togglePopup}
-          />
-          <h2 className="text-2xl font-semibold mb-4">Informasi Anda</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="nama" className="block mb-2">
-                Nama
-              </label>
-              <input
-                type="text"
-                id="nama"
-                name="nama"
-                value={formData.nama}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="nomorPonsel" className="block mb-2">
-                Nomor Ponsel
-              </label>
-              <input
-                type="text"
-                id="nomorPonsel"
-                name="nomorPonsel"
-                value={formData.nomorPonsel}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="block mb-2">
-                Alamat Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <h3 className="text-xl font-semibold mb-4">Detail Package</h3>
-            
-            <p className="mb-4">{fasilitas}<hr />{deskripsi_usaha}
-            </p>
-            <div className="mt-4 p-4 bg-gray-100 rounded-md mb-5">
-              <h4 className="text-lg font-semibold">Total Harga</h4>
-              <p className="text-lg font-light">Rp {harga}</p>
-            </div>
-            <button
-              type="submit"
-              className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-center font-semibold hover:bg-blue-500"
-            >
-              Book Now
-            </button>
-          </form>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white w-full max-w-lg p-8 rounded-lg relative z-50">
+            <IoClose
+              className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
+              onClick={togglePopup}
+            />
+            <h2 className="text-2xl font-semibold mb-4">Informasi Anda</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="nama" className="block mb-2">
+                  Nama
+                </label>
+                <input
+                  type="text"
+                  id="nama"
+                  name="nama"
+                  value={formData.nama}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="nomorPonsel" className="block mb-2">
+                  Nomor Ponsel
+                </label>
+                <input
+                  type="text"
+                  id="nomorPonsel"
+                  name="nomorPonsel"
+                  value={formData.nomorPonsel}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="email" className="block mb-2">
+                  Alamat Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                 
+                  className="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Detail Package</h3>
+              <p className="mb-4">{fasilitas}</p>
+              <p className="mb-4">{deskripsi_usaha}</p>
+              <div className="mt-4 p-4 bg-gray-100 rounded-md mb-5">
+                <h4 className="text-lg font-semibold">Total Harga</h4>
+                <p className="text-lg font-light">Rp {harga}</p>
+              </div>
+              <button
+                type="submit"
+                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-center font-semibold hover:bg-blue-500"
+              >
+                Book Now
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    )}
+      )}
     </div>
   );
 };
