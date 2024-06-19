@@ -1,25 +1,56 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const cekpesanan = () => {
+const CekPesanan = () => {
+  const location = useLocation();
+  const {
+    nama_usaha,
+    deskripsi_usaha,
+    jenis_usaha,
+    alamat_usaha,
+    harga,
+    formData = {},
+    foto_usaha = [],
+  } = location.state || {};
+
   return (
-    <div className="flex min-h-screen items-center justify-center text-black">
-
-      <div style={{width: 1700, height: 1276, position: 'relative', background: '#F2FAFD'}}>
-      <div style={{width: 1520, height: 1077, left: 55, top: 212, position: 'absolute', background: 'white', borderRadius: 10}} />
-      <div style={{width: 1520, height: 93, left: 55, top: 99, position: 'absolute', background: 'white', borderRadius: 10, fontSize: 32, fontFamily: 'Inter', fontWeight: '700', lineHeight: 3,}}>Pesanan anda</div>
-      <Link
-          to="/accommodations"
-          className="rounded-full bg-blue-500 text-white py-2 px-4 font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hover:bg-blue-600 transition duration-300"
-          style={{ zIndex: 10 }}
-        >Booking
-        </Link>
-        <li>
-            <Link to="/accommodations">Akomodasi</Link>
-          </li>
-    </div>
+    <div className="flex min-h-screen items-center justify-center text-black bg-gray-100">
+      <div className="w-full max-w-4xl bg-[#F2FAFD] p-5 rounded-lg shadow-md">
+        <div className="bg-white rounded-lg p-6">
+          <h2 className="text-2xl font-semibold mb-4 text-center">
+            Pesanan Anda
+          </h2>
+          <div className="flex flex-wrap items-center justify-center">
+            <div className="w-full md:w-1/3 pr-4 mb-4 md:mb-0">
+              {foto_usaha.length > 0 && (
+                <img
+                  src={foto_usaha[0]}
+                  alt="Gambar Usaha"
+                  className="w-full h-auto rounded-md shadow-md"
+                />
+              )}
+            </div>
+            <div className="w-full md:w-2/3">
+              <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
+              <p className="text-sm text-gray-600 mb-1">{jenis_usaha}</p>
+              <p className="text-sm text-gray-600 mb-1">{alamat_usaha}</p>
+              <p className="text-sm text-gray-600 mb-1">{deskripsi_usaha}</p>
+              <p className="text-sm text-gray-600 mb-1">Harga: Rp {harga}</p>
+              <p className="text-sm text-gray-600 mb-1">
+                Nama Pemesan: {formData.nama || ""}
+              </p>
+              <p className="text-sm text-gray-600 mb-1">
+                Nomor Ponsel: {formData.nomorPonsel || ""}
+              </p>
+              <p className="text-sm text-gray-600 mb-1">
+                Email: {formData.email || ""}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}; 
+};
 
-export default cekpesanan;
+export default CekPesanan;

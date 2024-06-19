@@ -15,6 +15,7 @@ import UsahaDetail from "./pages/Pengusaha/usahaDetail";
 import FooterPages from "./components/FooterPages/Footer";
 import Mobil from "./pages/MobilPage/Mobil"; // Import the Mobil component
 import JenisUsahaList from "./pages/jenisUsahaList/jenisUsahaList";
+import esanan from "./pages/Pesanan/pesanan";
 
 const role = localStorage.getItem("role");
 
@@ -73,6 +74,16 @@ function App() {
             <>
               <Navbar />
               <CekPesanan />
+              <FooterPages />
+            </>
+          }
+        />
+        <Route
+          path="/cekpesanan"
+          element={
+            <>
+              <Navbar />
+              <pesanan />
               <FooterPages />
             </>
           }

@@ -79,7 +79,10 @@ const CreateUsaha = () => {
         async () => {
           try {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            setImageUrls((prevUrls) => [...prevUrls, downloadURL]);
+            setImageUrls((prevUrls) => [
+              ...prevUrls,
+              { name: file.name, url: downloadURL },
+            ]);
           } catch (error) {
             console.error("Error getting download URL:", error);
             setError("Error getting download URL");
@@ -118,7 +121,7 @@ const CreateUsaha = () => {
         deskripsi_usaha,
         jenis_usaha,
         alamat_usaha,
-        foto_usaha: imageUrls,
+        foto_usaha: imageUrls.map((image) => image.url),
         harga,
         fasilitas,
       };
@@ -145,6 +148,10 @@ const CreateUsaha = () => {
         setError("Other error occurred");
       }
     }
+  };
+
+  const handleRemoveImage = (name) => {
+    setImageUrls((prevUrls) => prevUrls.filter((image) => image.name !== name));
   };
 
   return (
@@ -209,6 +216,24 @@ const CreateUsaha = () => {
             multiple
             required
           />
+          {imageUrls.length > 0 && (
+            <div className="mb-4">
+              <p className="font-bold">Uploaded Photos:</p>
+              <ul className="list-disc list-inside">
+                {imageUrls.map((image) => (
+                  <li key={image.name} className="flex items-center gap-2">
+                    <span>{image.name}</span>
+                    <button
+                      className="text-red-500"
+                      onClick={() => handleRemoveImage(image.name)}
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <input
             type="text"
             name="harga"
