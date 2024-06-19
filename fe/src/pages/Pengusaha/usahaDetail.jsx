@@ -82,15 +82,14 @@ const UsahaDetail = () => {
                   <FaStar className="w-5 h-5 text-yellow-500" />
                   <FaStar className="w-5 h-5 text-yellow-500" />
                   <FaStar className="w-5 h-5 text-yellow-500" />
-                  <FaStar className="w-5 h-5 text-yellow-500" />
+                  <FaStar className="w-5 h-5 text-gray-500" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-2">{nama_usaha}</h2>
                 <p className="text-sm text-gray-600">{jenis_usaha}</p>
                 <p className="text-sm text-gray-600">{alamat_usaha}</p>
-                <p className="text-sm text-gray-600">{deskripsi_usaha}</p>
               </div>
               <div className="flex flex-col items-start md:items-end">
-                <p className="text-2xl font-semibold mb-2">{harga}</p>
+                <p className="text-2xl font-semibold mb-2">Rp {harga}</p>
                 <div
                   className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center font-semibold hover:bg-blue-500 mt-2"
                   onClick={togglePopup}
@@ -101,19 +100,12 @@ const UsahaDetail = () => {
             </div>
           </div>
           <hr className="mt-8 border-gray-300" />
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {fasilitasArray.map(
-              (
-                fasilitasItem,
-                index // Using fasilitasArray
-              ) => (
-                <div key={index} className="flex items-center gap-2">
-                  <FaWifi className="text-lg" />
-                  <p>{fasilitasItem.trim()}</p> // Trim to remove extra spaces
-                </div>
-              )
-            )}
+          <div>
+            <h2 className="text-xl font-semibold my-2">Fasilitas</h2>
+            <p className="text-sm">{fasilitas}</p>
+            <p className="text-sm">{deskripsi_usaha}</p>
           </div>
+          
           <hr className="mt-8 border-gray-300" />
         </div>
         <div className="flex flex-col sm:flex-row justify-between gap-8 mt-8">

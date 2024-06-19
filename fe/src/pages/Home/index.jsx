@@ -15,12 +15,14 @@ const Index = () => {
       <img
         src={landing}
         alt="landing.jpg"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover rounded"
+        style={{ marginTop: "90px" }} // Atur margin-top sesuai kebutuhan
       />
-      <div className="absolute inset-0  opacity-50" />
+      <div className="absolute inset-0 opacity-50" />
     </div>
   );
 };
+
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -182,20 +184,20 @@ const App = () => {
         <img
           src={MbakMbak}
           alt="MbakMbak.jpg"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-md"
         />
         <div className="absolute top-0 left-0 w-full h-full flex items-center">
           <div className="w-1/2 h-full flex flex-col justify-center pl-10">
-            <h1 className="text-blue-800 text-6xl font-medium">
+            <h1 className="text-blue-800 text-5xl font-medium">
               Check The{" "}
               <span className="font-bold text-blue-900">Best Deal</span>
             </h1>
-            <h1 className="text-blue-800 text-6xl font-medium">
+            <h1 className="text-blue-800 text-5xl font-medium">
               Just For You!!!!
             </h1>
             <p className="mt-4 max-w">
               Book now and experience the magic of a dream vacation
-              <br />. From breathtaking landscapes to romantic dinners, every
+              <br />rom breathtaking landscapes to romantic dinners, every
               moment will be special.
               <br />
               Let’s make this journey one to remember forever.
@@ -203,7 +205,7 @@ const App = () => {
           </div>
           <Link
             to="/accommodations"
-            className="rounded-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-center font-semibold text-sm absolute bottom-20 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7"
+            className="rounded-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-center font-semibold text-sm absolute bottom-10 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7"
             style={{ zIndex: 10 }}
           >
             Explore Packages
@@ -257,6 +259,72 @@ const App = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+      <footer className="bg-white py-8">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="col-span-1 lg:col-span-2">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">
+            Borobudur Society
+          </h5>
+          <p className="text-sm text-gray-700 mb-2">Whatsapp: 081294</p>
+          <p className="text-sm text-gray-700 mb-2">
+            Email: Borobudursociety@mail
+          </p>
+          <p className="text-sm text-gray-700 mb-2">
+            Pusat panggilan (khusus Indonesia): 0842982
+          </p>
+        </div>
+        <div className="col-span-1">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">
+            Perusahaan
+          </h5>
+          <ul className="list-none p-0 m-0">
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Blog
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Karir
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Korporasi
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-1">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">Dukungan</h5>
+          <ul className="list-none p-0 m-0">
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Pusat Bantuan
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Kebijakan Privasi
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Syarat & Ketentuan
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-1 lg:col-span-2">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">
+            Copyright 2024
+          </h5>
+          <p className="text-sm text-gray-700">Borobudur Society, Indonesia</p>
+        </div>
+      </div>
+    </footer>
       </div>
     </div>
   );

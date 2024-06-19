@@ -479,7 +479,6 @@ const UsahaDetail = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                 
                   className="w-full px-3 py-2 border rounded-md"
                 />
               </div>
@@ -502,23 +501,6 @@ const UsahaDetail = () => {
       )}
     </div>
   );
-};
-
-const renderIcon = (item) => {
-  switch (item.icon) {
-    case "FaWifi":
-      return <FaWifi className="text-lg" />;
-    case "FaToilet":
-      return <FaToilet className="text-lg" />;
-    case "FaUtensils":
-      return <FaUtensils className="text-lg" />;
-    case "FaParking":
-      return <FaParking className="text-lg" />;
-    case "FaChair":
-      return <FaChair className="text-lg" />;
-    default:
-      return null;
-  }
 };
 
 export default UsahaDetail;
