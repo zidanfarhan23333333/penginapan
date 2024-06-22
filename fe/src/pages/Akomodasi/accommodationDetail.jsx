@@ -277,7 +277,8 @@ import {
 } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const UsahaDetail = () => {
   const { id } = useParams();
@@ -285,51 +286,54 @@ const UsahaDetail = () => {
   const [deskripsi_usaha, setDeskripsiUsaha] = useState("");
   const [jenis_usaha, setJenisUsaha] = useState("");
   const [alamat_usaha, setAlamatUsaha] = useState("");
-  const [fasilitas, setFasilitas] = useState([]);
   const [harga, setHarga] = useState("");
   const [foto_usaha, setFotoUsaha] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [fasilitas, setFasilitas] = useState([]);
+  const [user_id, setUser_id] = useState("");
+  const [no_telp, setNoTelp] = useState("");
+
+  const navigate = useNavigate();
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const [formData, setFormData] = useState({
-    nama: "",
-    nomorPonsel: "",
-    email: "",
-  });
+  useEffect(() => {
+    const userCookie = Cookies.get("userData");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { nama, nomorPonsel, email } = formData;
-    if (!nama || !nomorPonsel || !email) {
-      alert("Semua bidang harus diisi!");
-      return;
+    if (userCookie) {
+      const userDataObj = JSON.parse(userCookie);
+      setUser_id(userDataObj.user_id);
     }
-    handleBooking();
-  };
+  }, []);
 
   const handleBooking = async () => {
     try {
-      // Contoh menggunakan axios untuk mengirim data pesanan ke server
-      const response = await axios.post(
-        'http://localhost:4000/api/pesanan', 
-        formData);
+      const response = await axios.post("http://localhost:4000/api/pesanan", {
+        user_id,
+        usaha_id: id,
+        no_telp,
+        nama_usaha,
+        jenis_usaha,
+        alamat_usaha,
+        foto_usaha,
+      });
 
-      console.log('Booking successful:', response.data);
-      // Tambahkan logika setelah booking berhasil, seperti menampilkan pesan sukses atau mengarahkan pengguna ke halaman terima kasih
+      if (response.data.status_code === 200) {
+        navigate("/cekpesanan");
+        console.log(response.data.data);
+      } else {
+        console.log("create community failed");
+      }
     } catch (error) {
-      console.error('Error while booking:', error.message);
-      // Tambahkan logika untuk menangani error, misalnya menampilkan pesan error kepada pengguna
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else if (error.request) {
+        console.log("No response received from server:", error.request);
+      } else {
+        console.log("Request error:", error.message);
+      }
     }
   };
 
@@ -344,9 +348,9 @@ const UsahaDetail = () => {
         setDeskripsiUsaha(data.deskripsi_usaha);
         setJenisUsaha(data.jenis_usaha);
         setAlamatUsaha(data.alamat_usaha);
-        setFasilitas(data.fasilitas);
         setHarga(data.harga);
         setFotoUsaha(data.foto_usaha || []);
+        setFasilitas(data.fasilitas || []);
       } catch (error) {
         console.log(error.message);
       }
@@ -445,20 +449,7 @@ const UsahaDetail = () => {
               onClick={togglePopup}
             />
             <h2 className="text-2xl font-semibold mb-4">Informasi Anda</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="nama" className="block mb-2">
-                  Nama
-                </label>
-                <input
-                  type="text"
-                  id="nama"
-                  name="nama"
-                  value={formData.nama}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-md"
-                />
-              </div>
+            <form>
               <div className="mb-4">
                 <label htmlFor="nomorPonsel" className="block mb-2">
                   Nomor Ponsel
@@ -467,21 +458,8 @@ const UsahaDetail = () => {
                   type="text"
                   id="nomorPonsel"
                   name="nomorPonsel"
-                  value={formData.nomorPonsel}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-md"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block mb-2">
-                  Alamat Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={no_telp}
+                  onChange={(e) => setNoTelp(e.target.value)}
                   className="w-full px-3 py-2 border rounded-md"
                 />
               </div>
@@ -494,6 +472,7 @@ const UsahaDetail = () => {
               </div>
               <button
                 type="submit"
+                onClick={handleBooking}
                 className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md text-center font-semibold hover:bg-blue-500"
               >
                 Book Now

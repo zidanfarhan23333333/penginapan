@@ -1,11 +1,36 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const PesananSchema = new mongoose.Schema({
-  usaha_id: {type: String, required: true },
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  createdAt: { type: Date, default: Date.now }
-});
+const pesananSchema = new mongoose.Schema(
+  {
+    pesanan_id: {
+      type: String,
+      unique: true,
+    },
+    usaha_id: {
+      type: String,
+    },
+    user_id: {
+      type: String,
+    },
+    no_telp: {
+      type: String,
+    },
+    nama_usaha: {
+      type: String,
+    },
+    foto_usaha: {
+      type: [String],
+    },
+    alamat_usaha: {
+      type: String,
+    },
+    jenis_usaha: {
+      type: String,
+    },
+  },
+  { timestamps: true, _id: true }
+);
 
-const Pesanan = mongoose.model('Pesanan', PesananSchema);
+const pesananModel = mongoose.model("pesanan", pesananSchema);
 
-export default Pesanan;
+export default pesananModel;
