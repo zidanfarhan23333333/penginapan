@@ -48,14 +48,14 @@ const UsahaList = () => {
             usaha.map((item) => (
               <div
                 key={item.usaha_id}
-                className="card bg-white rounded-lg shadow-md w-full"
+                className="card bg-white rounded-lg shadow-md w-full flex flex-col"
               >
                 <div
-                  className="w-full h-48 bg-cover bg-center rounded-t-lg"
+                  className="w-full h-48 bg-cover bg-center"
                   style={{ backgroundImage: `url(${item.foto_usaha[0]})` }}
                 ></div>
-                <div className="p-6">
-                  <h1 className="text-xl font-semibold text-gray-800 mb-3">
+                <div className="p-4 flex flex-col flex-grow">
+                  <h1 className="text-xl font-semibold text-gray-800 mb-2">
                     {item.nama_usaha}
                   </h1>
                   <p className="text-sm text-gray-600 mb-2">
@@ -69,7 +69,7 @@ const UsahaList = () => {
                   </p>
                   <p className="text-sm text-gray-600 mb-2">{item.fasilitas}</p>
                   <p className="text-sm text-gray-600 mb-4">{item.harga}</p>
-                  <div className="flex gap-2">
+                  <div className="mt-auto">
                     <Link
                       to={`/usaha/${item.usaha_id}`}
                       className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
@@ -82,12 +82,12 @@ const UsahaList = () => {
                     >
                       Edit
                     </Link>
-                    <button
-                      className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    <Link
                       onClick={() => deleteUsaha(item.usaha_id)}
+                      className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
                     >
                       Delete
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

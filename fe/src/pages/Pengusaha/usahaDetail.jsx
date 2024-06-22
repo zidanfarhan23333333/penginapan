@@ -90,12 +90,7 @@ const UsahaDetail = () => {
               </div>
               <div className="flex flex-col items-start md:items-end">
                 <p className="text-2xl font-semibold mb-2">Rp {harga}</p>
-                <div
-                  className="bg-blue-600 text-white py-2 px-4 rounded-md cursor-pointer text-center font-semibold hover:bg-blue-500 mt-2"
-                  onClick={togglePopup}
-                >
-                  Pesan Sekarang
-                </div>
+                
               </div>
             </div>
           </div>

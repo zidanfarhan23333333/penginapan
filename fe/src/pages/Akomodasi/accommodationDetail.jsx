@@ -321,7 +321,10 @@ const UsahaDetail = () => {
   const handleBooking = async () => {
     try {
       // Contoh menggunakan axios untuk mengirim data pesanan ke server
-      const response = await axios.post('http://localhost:4000/api/booking', formData);
+      const response = await axios.post(
+        'http://localhost:4000/api/pesanan', 
+        formData);
+
       console.log('Booking successful:', response.data);
       // Tambahkan logika setelah booking berhasil, seperti menampilkan pesan sukses atau mengarahkan pengguna ke halaman terima kasih
     } catch (error) {
