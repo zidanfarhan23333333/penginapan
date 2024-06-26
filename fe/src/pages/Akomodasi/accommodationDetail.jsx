@@ -308,7 +308,14 @@ const UsahaDetail = () => {
     }
   }, []);
 
-  const handleBooking = async () => {
+  const handleBooking = async (e) => {
+    e.preventDefault();
+    if (!user_id) {
+      alert("Anda harus login untuk melakukan pemesanan");
+      navigate("/login");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:4000/api/pesanan", {
         user_id,

@@ -113,16 +113,16 @@ const CekPesanan = () => {
                   </p>
                   <p className="text-sm text-gray-600 mb-1">Email: {email}</p>
                 </div>
-                <div className="mt-auto">
+                <div className="flex space-x-2">
                   <Link
                     to={`/view/${item.pesanan_id}`}
-                    className="block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
                   >
                     Lihat
                   </Link>
                   <button
                     onClick={() => handleDelete(item.pesanan_id)}
-                    className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
                   >
                     Delete
                   </button>

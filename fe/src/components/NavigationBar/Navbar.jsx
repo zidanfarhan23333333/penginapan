@@ -74,12 +74,12 @@ const Navbar = () => {
   const role = localStorage.getItem("role");
 
   return (
-    <div className="fixed font-poppins top-0 left-0 right-0 z-50 bg-white backdrop-blur-md">
+    <div className="fixed font-poppins top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm">
       <div className="flex justify-between text-black items-center h-20 px-2">
         <div>
-          <h1 className="cursor-pointer text-xl mt-1 ml-2">
+          <h1 className="cursor-pointer text-2xl mt-1 ml-2">
             <Link to="/">
-              Borobudur <span className="text-blue-500">Society</span>
+              Borobudur <span className="text-blue-500 ">Society</span>
             </Link>
           </h1>
         </div>
@@ -91,7 +91,7 @@ const Navbar = () => {
           <li>
             <Link to="/cekpesanan">Cek pesanan</Link>
           </li>
-          
+
           {role === "pengusaha" && (
             <li>
               <Link to="/usaha">Usaha Anda</Link>
@@ -109,7 +109,7 @@ const Navbar = () => {
               {user ? (
                 <span>{user.name}</span>
               ) : (
-                <span className=" block w-full text-center px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-xl">
+                <span className=" text-white block w-full text-center px-4 py-2 bg-blue-800 hover:bg-blue-600 rounded-xl">
                   Login
                 </span>
               )}
