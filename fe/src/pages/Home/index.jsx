@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import { FaHotel, FaUtensils, FaHooli, FaCarAlt } from "react-icons/fa";
+import { FaHotel, FaUtensils, FaHooli, FaCarAlt, FaHatCowboy } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import landing from "../../assets/landing.jpg";
 import card from "../../assets/card.png";
@@ -26,6 +26,10 @@ const Index = () => {
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isValid, setIsValid] = useState(true);
+
+  const setJenisUsaha = (jenisUsaha) => {
+    localStorage.setItem("jenis_usaha", jenisUsaha);
+  };
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -80,28 +84,48 @@ const App = () => {
             </span>
           )}
         </div>
-        <div className="absolute top-2/3 transform -translate-y-1/2 flex justify-center space-x-4 w-full max-w-2xl mt-20">
+        <div className="absolute top-2/3 transform -translate-y-1/2 flex justify-center space-x-8 w-full max-w-2xl mt-20">
           {" "}
           {/* Adjusted mt-10 here */}
           <div className="text-center">
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Hotel")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
             <FaHotel size={40} className="text-blue-500" />
-            <p>Hotel</p>
+            <p className="flex w-full justify-center items-center">Hotel</p>
+          </Link>
           </div>
           <div className="text-center">
-            <Link to="/RestaurantList">
-              <FaUtensils size={40} className="text-blue-500" />
-              <p>Restaurant</p>
-            </Link>
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Restaurant")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
+            <FaUtensils size={40} className="text-blue-500" />
+            <p className="flex w-full justify-center items-center">Restaurant</p>
+          </Link>
           </div>
           <div className="text-center">
-            <FaHooli size={40} className="text-blue-500" />
-            <p>Destination</p>
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Wisata")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
+            <FaHatCowboy size={40} className="text-blue-500" />
+            <p className="flex w-full justify-center items-center">Destination</p>
+          </Link>
           </div>
           <div className="text-center">
-            <Link to="Mobil">
-              <FaCarAlt size={40} className="text-blue-500" />
-              <p>Rent Car</p>
-            </Link>
+          <Link
+            to="/jenis-usaha"
+            onClick={() => setJenisUsaha("Mobil")}
+            className="text-center flex items-center flex-col w-full justify-center"
+          >
+            <FaCarAlt size={40} className="text-blue-500" />
+            <p className="flex w-full justify-center items-center">Rent Car</p>
+          </Link>
           </div>
         </div>
       </div>
@@ -240,6 +264,72 @@ const App = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+      <footer className="bg-white py-8">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="col-span-1 lg:col-span-2">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">
+            Borobudur Society
+          </h5>
+          <p className="text-sm text-gray-700 mb-2">Whatsapp: 081294</p>
+          <p className="text-sm text-gray-700 mb-2">
+            Email: Borobudursociety@mail
+          </p>
+          <p className="text-sm text-gray-700 mb-2">
+            Pusat panggilan (khusus Indonesia): 0842982
+          </p>
+        </div>
+        <div className="col-span-1">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">
+            Perusahaan
+          </h5>
+          <ul className="list-none p-0 m-0">
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Blog
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Karir
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Korporasi
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-1">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">Dukungan</h5>
+          <ul className="list-none p-0 m-0">
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Pusat Bantuan
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Kebijakan Privasi
+              </a>
+            </li>
+            <li className="mb-2">
+              <a href="#" className="text-gray-700 hover:text-blue-600 text-sm">
+                Syarat & Ketentuan
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-1 lg:col-span-2">
+          <h5 className="text-lg font-semibold text-blue-800 mb-4">
+            Copyright 2024
+          </h5>
+          <p className="text-sm text-gray-700">Borobudur Society, Indonesia</p>
+        </div>
+      </div>
+    </footer>
       </div>
     </div>
   );
