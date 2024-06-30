@@ -26,14 +26,6 @@ const Navbar = () => {
     };
   }, []);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
   useEffect(() => {
     const getUserDataFromCookie = () => {
       const cookieData = document.cookie
@@ -73,9 +65,17 @@ const Navbar = () => {
 
   const role = localStorage.getItem("role");
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <div className="fixed font-poppins top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm">
-      <div className="flex justify-between text-black items-center h-20 px-2">
+      <div className="flex justify-between items-center h-20 px-2 md:px-6">
         <div>
           <h1 className="cursor-pointer text-2xl mt-1 ml-2">
             <Link to="/">
@@ -84,12 +84,12 @@ const Navbar = () => {
           </h1>
         </div>
 
-        <ul className="hidden md:flex cursor-pointer">
+        <ul className="hidden md:flex space-x-6">
           <li>
             <Link to="/accommodations">Akomodasi</Link>
           </li>
           <li>
-            <Link to="/cekpesanan">Cek pesanan</Link>
+            <Link to="/cekpesanan">Cek Pesanan</Link>
           </li>
 
           {role === "pengusaha" && (
@@ -109,7 +109,7 @@ const Navbar = () => {
               {user ? (
                 <span>{user.name}</span>
               ) : (
-                <span className=" text-white block w-full text-center px-4 py-2 bg-blue-800 hover:bg-blue-600 rounded-xl">
+                <span className="text-white block w-full text-center px-4 py-2 bg-blue-800 hover:bg-blue-600 rounded-xl">
                   Login
                 </span>
               )}
@@ -137,43 +137,52 @@ const Navbar = () => {
         </div>
 
         {/* Menu hamburger */}
-        <div className="md:hidden cursor-pointer">
-          <HiOutlineMenuAlt4 size={20} onClick={toggleMobileMenu} />
+        <div className="md:hidden">
+          <HiOutlineMenuAlt4
+            size={24}
+            className="cursor-pointer"
+            onClick={toggleMobileMenu}
+          />
         </div>
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="absolute left-0 top-20 w-full bg-gray-100/90 py-7 flex flex-col">
-            <ul>
-              <li className="border-b">
-                <Link to="/accommodations">Akomodasi</Link>
-              </li>
-              <li className="border-b">Destinasi</li>
-              <li className="border-b">Travel</li>
-              <li className="border-b">View</li>
-              <li className="border-b">Book</li>
+          <div className="fixed top-20 left-0 right-0 bg-gray-100 py-7">
+            <div className="flex flex-col items-center space-y-4">
+              <Link to="/accommodations" className="text-xl">
+                Akomodasi
+              </Link>
+              <Link to="/cekpesanan" className="text-xl">
+                Cek Pesanan
+              </Link>
+
               {role === "pengusaha" && (
-                <li>
-                  <Link to="/usaha">Usaha Anda</Link>
-                </li>
+                <Link to="/usaha" className="text-xl">
+                  Usaha Anda
+                </Link>
               )}
-            </ul>
-            <div className="flex flex-col">
-              {user ? (
-                <button onClick={handleLogout} className="my-6">
-                  Logout
-                </button>
-              ) : (
-                <button onClick={() => navigate("/login")} className="my-6">
-                  Login
-                </button>
-              )}
-            </div>
-            <div className="flex justify-between my-6">
-              <FaFacebook className="icon" />
-              <FaTwitter className="icon" />
-              <FaYoutube className="icon" />
-              <FaInstagram className="icon" />
+
+              <div className="flex items-center space-x-4">
+                {user ? (
+                  <button onClick={handleLogout} className="text-xl">
+                    Logout
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="text-xl"
+                  >
+                    Login
+                  </button>
+                )}
+
+                <div className="flex justify-between w-24">
+                  <FaFacebook className="text-3xl" />
+                  <FaTwitter className="text-3xl" />
+                  <FaYoutube className="text-3xl" />
+                  <FaInstagram className="text-3xl" />
+                </div>
+              </div>
             </div>
           </div>
         )}
