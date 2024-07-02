@@ -27,7 +27,7 @@ const UsahaList = ({ jenisUsaha }) => {
   }, []);
 
   return (
-    <div className="absolute top-0 right-0 bottom-0 w-1/2 h-full flex justify-center items-center pr-10 gap-2">
+    <div className="flex flex-wrap justify-center gap-4">
       {error && <p className="text-red-500">{error}</p>}
       {usaha.length === 0 ? (
         <p className="text-center text-gray-600">No usaha found.</p>
@@ -35,25 +35,31 @@ const UsahaList = ({ jenisUsaha }) => {
         usaha.map((item) => (
           <div
             key={item.usaha_id}
-            className="card bg-white rounded-lg shadow-md w-80"
+            className="card bg-white rounded-lg shadow-md w-full sm:w-56 md:w-72"
+            style={{ maxWidth: "100%" }}
           >
             <img
               src={item.foto_usaha[0]}
               alt={item.nama_usaha}
-              className="w-full h-48 object-cover rounded-t-lg"
+              className="w-full h-32 sm:h-40 md:h-48 object-cover rounded-t-lg"
             />
-            <div className="card-content p-6">
-              <h1 className="text-xl font-semibold text-gray-800 mb-3">
+            <div className="card-content p-2 sm:p-3 md:p-4">
+              <h1 className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 mb-1 sm:mb-2">
                 {item.nama_usaha}
               </h1>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-1 sm:mb-2">
                 {item.deskripsi_usaha}
               </p>
-              <p className="text-sm text-gray-600 mb-2">{item.fasilitas}</p>
-              <p className="text-sm text-red-600 mb-4">{item.harga}</p>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-1 sm:mb-2">
+                {item.fasilitas}
+              </p>
+              <p className="text-xs sm:text-sm md:text-base text-red-600 mb-1 sm:mb-2">
+                {item.harga}
+              </p>
               <Link
                 to={`/detailAkomodasi/${item.usaha_id}`}
-                className="card-button block bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
+                className="card-button block bg-blue-500 hover:bg-blue-600 text-white py-1 sm:py-2 px-2 sm:px-4 rounded-md text-center font-semibold text-xs sm:text-sm md:text-base"
+                style={{ width: "100%" }}
               >
                 Book Now
               </Link>
@@ -188,21 +194,20 @@ const App = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center space-x-4">
-        <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
-          <img src={card} alt="Full Package" />
-          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
-            <div className="package-info text-left ml-4">
-              <h2 className="text-white text-2xl font-medium mb-2">
-                Full Package
-              </h2>
-              <p className="text-white text-sm">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 md:mt-4 mt-4">
+        <div className="package-card relative mb-4 md:mb-0">
+          <img src={card} alt="Full Package" className="w-full" />
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center bg-blue-500 bg-opacity-50">
+            <div className="package-info text-white text-left mx-4 my-auto">
+              <h2 className="text-2xl font-medium mb-2">Full Package</h2>
+              <p className="text-sm">
                 Offering everything you need for a perfect vacation. Book now
                 and indulge in the best of what we offer!
               </p>
               <Link
                 to={`/detailAkomodasi/5208e8e0-cb92-4a23-b767-c43c1f557b46`}
-                className="bg-blue-500 mt-3 block w-32 text-center text-white py-2 px-4 rounded-lg text-sm font-semibold"
+                className="bg-white mt-3 block w-full text-center text-blue-500 py-2 px-4 rounded-lg text-sm font-semibold"
               >
                 See
               </Link>
@@ -210,20 +215,18 @@ const App = () => {
           </div>
         </div>
 
-        <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
-          <img src={card} alt="Half Package" />
-          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
-            <div className="package-info text-left ml-4">
-              <h2 className="text-white text-2xl font-bold mb-2">
-                Half Package
-              </h2>
-              <p className="text-white text-sm font-medium">
+        <div className="package-card relative mb-4 md:mb-0">
+          <img src={card} alt="Half Package" className="w-full" />
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center bg-blue-500 bg-opacity-50">
+            <div className="package-info text-white text-left mx-4 my-auto">
+              <h2 className="text-2xl font-bold mb-2">Half Package</h2>
+              <p className="text-sm">
                 Perfect for those seeking a balanced blend of relaxation and
                 adventure. Reserve for a memorable retreat!
               </p>
               <Link
-                to={`/detailAkomodasi/e59fc894-0c5f-4064-bee0-88e60151f516`}
-                className="bg-blue-500 mt-3 block w-32 text-center text-white py-2 px-4 rounded-lg text-sm font-semibold"
+                to={`/detailAkomodasi/1ea5c2f1-68ea-4d6f-a99f-7b61f9cbb361`}
+                className="bg-white mt-3 block w-full text-center text-blue-500 py-2 px-4 rounded-lg text-sm font-semibold"
               >
                 See
               </Link>
@@ -231,20 +234,18 @@ const App = () => {
           </div>
         </div>
 
-        <div className="package-card relative mb-4 mr-4 ml-4 mt-4">
-          <img src={pantai} alt="Small Package" />
-          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center">
-            <div className="package-info text-left ml-4">
-              <h2 className="text-white text-2xl font-medium mb-2">
-                Small Package
-              </h2>
-              <p className="text-white text-sm">
+        <div className="package-card relative mb-4 md:mb-0">
+          <img src={pantai} alt="Small Package" className="w-full" />
+          <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-center bg-blue-500 bg-opacity-50">
+            <div className="package-info text-white text-left mx-4 my-auto">
+              <h2 className="text-2xl font-medium mb-2">Small Package</h2>
+              <p className="text-sm">
                 Take a quick break from the routine with our Small Package,
                 ideal for a short yet rejuvenating getaway.
               </p>
               <Link
                 to={`/detailAkomodasi/1242abd7-8365-4e78-b8be-b7cd48606cd2`}
-                className="bg-blue-500 mt-3 block w-32 text-center text-white py-2 px-4 rounded-lg text-sm font-semibold"
+                className="bg-white mt-3 block w-full text-center text-blue-500 py-2 px-4 rounded-lg text-sm font-semibold"
               >
                 See
               </Link>
@@ -253,34 +254,33 @@ const App = () => {
         </div>
       </div>
 
-      <div className="relative w-full h-screen mt-4 ml-2 mr-2 p-4">
+      <div className="relative w-full mt-4 ml-2 mr-2 p-4">
         <img
           src={MbakMbak}
           alt="MbakMbak.jpg"
-          className="w-full h-full object-cover"
+          className="w-full h-screen object-cover"
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center">
-          <div className="w-1/2 h-full flex flex-col justify-center pl-10">
-            <h1 className="text-blue-800 text-6xl font-medium">
+        <div className="absolute inset-0 flex flex-col md:flex-row items-center bg-opacity-75 ">
+          <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-10 text-center md:text-left mt-14 md:mt-32">
+            <h1 className="text-blue-800 text-3xl sm:text-4xl md:text-6xl font-medium">
               Check The{" "}
               <span className="font-bold text-blue-900">Best Deal</span>
             </h1>
-            <h1 className="text-blue-800 text-6xl font-medium">
-              Just For You!!!!
-            </h1>
-            <p className="mt-4 max-w">
-              Book now and experience the magic of a dream vacation
+            <p className="mt-4 max-w-md mx-auto md:mx-0 text-black text-sm sm:text-base md:text-lg">
+              Book now and experience the magic of a dream vacation From
+              breathtaking
               <br />
-              From breathtaking landscapes to romantic dinners, every moment
-              will be special
+              landscapes to romantic dinners, every moment will be special
               <br />
               Let’s make this journey one to remember forever.
             </p>
+          </div>
+          <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-10 text-center md:text-left mt-4 md:mt-0">
             <UsahaList jenisUsaha={localStorage.getItem("jenis_usaha")} />
           </div>
           <Link
             to="/accommodations"
-            className="rounded-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-center font-semibold text-sm absolute bottom-10 left-1/2 transform -translate-x-1/2 mb- max-w-xs mb-7"
+            className="rounded-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 text-center font-semibold text-sm absolute bottom-10 left-1/2 transform -translate-x-1/2 mb-7"
             style={{ zIndex: 10 }}
           >
             Explore Packages
