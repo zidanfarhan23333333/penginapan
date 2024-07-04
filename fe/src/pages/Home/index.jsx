@@ -26,6 +26,8 @@ const UsahaList = ({ jenisUsaha }) => {
     fetchUsaha();
   }, []);
 
+  
+
   return (
     <div className="flex flex-wrap justify-center gap-4">
       {error && <p className="text-red-500">{error}</p>}
@@ -91,11 +93,46 @@ const setJenisUsaha = (jenisUsaha) => {
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [usaha, setUsaha] = useState([]);
+  const [error, setError] = useState(null);
 
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    setIsValid(value.length <= 3);
+  const fetchUsaha = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/api/usaha");
+      setUsaha(response.data.data.slice(0, 2));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  useEffect(() => {
+
+    fetchUsaha();
+  }, []);
+  
+
+  const handleSearchChange = async (e) => {
+    const q = e.target.value;
+    setSearchTerm(q);
+    setIsValid(q.length >= 3);
+
+    try {
+      if (q.length > 0) {
+        const response = await axios.get(
+          `http://localhost:4000/api/usaha/search`,
+          {
+            params: {
+              query: q,
+            },
+          }
+        );
+        setUsaha(response.data.data);
+        console.log(response.data.data);
+      } else if (q.length === 0) {
+        setUsaha([]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSearchSubmit = (e) => {
@@ -141,7 +178,7 @@ const App = () => {
           </form>
           {!isValid && (
             <span className="text-red-500 text-lg">
-              Maximum of 3 characters allowed
+              Minimum of 3 characters allowed
             </span>
           )}
         </div>

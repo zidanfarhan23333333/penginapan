@@ -1,22 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const UsahaList = () => {
   const [usaha, setUsaha] = useState([]);
   const [error, setError] = useState(null);
+  const [user_id, setUser_id] = useState(null);
 
   useEffect(() => {
     const fetchUsaha = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/usaha");
-        setUsaha(response.data.data);
+        const response = await axios.get(`http://localhost:4000/api/usaha/${user_id}/${user_id}`);
+        const data = response.data.data || [];
+        if (Array.isArray(data)) {
+          setUsaha(data);
+        } else {
+          setUsaha([]);
+          console.error('Data is not an array:', data);
+        }
       } catch (error) {
         setError(error.message);
       }
     };
 
-    fetchUsaha();
+    if (user_id) {
+      fetchUsaha();
+    }
+  }, [user_id]);
+
+  useEffect(() => {
+    const userCookie = Cookies.get("userData");
+
+    if (userCookie) {
+      const userDataObj = JSON.parse(userCookie);
+      setUser_id(userDataObj.user_id);
+    }
   }, []);
 
   const deleteUsaha = async (id) => {
@@ -42,10 +61,10 @@ const UsahaList = () => {
         </div>
         {error && <p className="text-red-500">{error}</p>}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {usaha.length === 0 ? (
+          {Array.isArray(usaha) && usaha.length === 0 ? (
             <p>No usaha found.</p>
           ) : (
-            usaha.map((item) => (
+            Array.isArray(usaha) && usaha.map((item) => (
               <div
                 key={item.usaha_id}
                 className="card bg-white rounded-lg shadow-md w-full flex flex-col"
@@ -82,12 +101,12 @@ const UsahaList = () => {
                     >
                       Edit
                     </Link>
-                    <Link
+                    <button
                       onClick={() => deleteUsaha(item.usaha_id)}
                       className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-center font-semibold text-sm"
                     >
                       Delete
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

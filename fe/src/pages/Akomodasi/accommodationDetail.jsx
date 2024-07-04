@@ -429,8 +429,8 @@ const UsahaDetail = () => {
               <div className="sm:w-1/2 sm:pr-4">
                 <iframe
                   className="w-full h-96 rounded-lg"
-                  src="https://maps.google.com/maps?width=100&amp;height=100&amp;hl=en&amp;q=balai%20desa%20kalegen+(Rumah%20Ferry)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                  title="Rumah Ferry Location"
+                  src="https://maps.google.com/maps?width=100&amp;height=100&amp;hl=en&amp;q=+(Borobudur%20Temple)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  title="Destination Location"
                 ></iframe>
               </div>
               <div className="flex flex-col sm:w-1/2">

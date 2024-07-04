@@ -27,6 +27,10 @@ export const getUsahaAndUpdate = async (id: string, payload: any) => {
   );
 };
 
+export const getUsahaByNama = async (q: string) => {
+  return await usahaModel.find({ nama_usaha: { $regex: new RegExp(q, "i") } });
+};
+
 export const insertUsaha = async (payload: any) => {
   return await usahaModel.create(payload);
 };

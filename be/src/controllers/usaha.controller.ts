@@ -4,6 +4,7 @@ import {
   getUsahaAndUpdate,
   getUsahaById,
   getUsahaByJenisUsaha,
+  getUsahaByNama,
   getUsahaByPengusahaId,
   getUsahaFoto,
   getusahaAndDelete,
@@ -13,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const getUsaha = async (req: Request, res: Response) => {
   const id = req.params.id;
+  const q = req.query.query as string;
 
   try {
     if (id) {
@@ -32,7 +34,24 @@ export const getUsaha = async (req: Request, res: Response) => {
           data: {},
         });
       }
-    } else {
+    } else if(q) {
+      const usaha = await getUsahaByNama(q);
+      if (usaha) {
+        return res.status(200).send({
+          status: true,
+          status_code: 200,
+          message: "Get detail data usaha successfully",
+          data: usaha,
+        });
+      } else {
+        return res.status(404).send({
+          status: false,
+          status_code: 404,
+          message: "No usaha found",
+          data: {},
+        });
+      }
+    }else {
       const usaha = await getAllUsaha();
       if (Array.isArray(usaha) && usaha.length > 0) {
         return res.status(200).send({
